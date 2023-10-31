@@ -38,6 +38,6 @@ In the bustling cityscapes of the modern world, efficient and sustainable delive
 To get started with the project:
 
 ```bash
-git clone <repository-url>
-cd <repository-name>
+git clone https://github.com/Decartes992/Autonomous-Electrical-Delivery-Vans.git)https://github.com/Decartes992/Autonomous-Electrical-Delivery-Vans.git
+cd Autonomous-Electrical-Delivery-Vans/tree/main
 npm install
