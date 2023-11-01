@@ -21,10 +21,7 @@
 extern FILE* filein;
 
 enum buildingsides {                                      //NW IS NORTH-WEST, NE IS NORTH-EAST, SW IS SOUTH-WEST, SE IS SOUTH-EAST
-    NW = 1,
-    NE = 2,
-    SW = 3,
-    SE = 4
+    NW, N, NE, W, DEFAULT, E, SW, S, SE
 };
 
 enum REC_STATUS { ACTIVE, DELETED };
