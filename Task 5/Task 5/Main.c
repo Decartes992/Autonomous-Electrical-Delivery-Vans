@@ -24,6 +24,7 @@ aedv* start_charging;                          // Start of list
 
 
 int main(void) {
+    //testing it out
 
     /*VARIABLE DECLARATION*/
     int street = 0, avenue = 0, check_if_to_run_emulation_of_aedv = 0;
