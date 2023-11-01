@@ -21,10 +21,10 @@
     <ClCompile Include="Map.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Taxi.c">
+    <ClCompile Include="Aedv.c">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Taxi_Functions.c">
+    <ClCompile Include="Aedv_Functions.c">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="UI_Manager.c">
@@ -44,13 +44,13 @@
     <ClInclude Include="Map.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Taxi_Functions.h">
+    <ClInclude Include="Aedv_Functions.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="UI_Manager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Taxi.h">
+    <ClInclude Include="Aedv.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="File_Manager.h">

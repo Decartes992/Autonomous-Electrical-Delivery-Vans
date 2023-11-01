@@ -5,20 +5,20 @@
 #include "Structure_definition.h"
 #include "Map.h"
 #include "General.h"
-#include "Taxi_Functions.h"
+#include "Aedv_Functions.h"
 #include "UI_Manager.h"
-#include "Taxi.h"
+#include "Aedv.h"
 
 /*MODULE: FILE_MANAGER
 *
 * WHAT IT DOES:THE FILE MANAGER MODULE IS PURPOSED TO HANDLE IO RELATED TO FILES
-* AND FOR ASSIGNING ORDERS TO THE TAXIS
+* AND FOR ASSIGNING ORDERS TO THE AEDVS
 *
-* DATE: 10-11-2022
+* DATE: 10-29-2023
 *
 * NAME:
 * IFTEKHAR RAFI
-* MAZEN
+* WILLIAM THORNTON
 *
 */
 
@@ -33,8 +33,8 @@
 
 
 /*
-* Taxi record: 
-* - Contains taxi information
+* AEDV record: 
+* - Contains AEDV information
 * - Indicates record is ACTIVE
 * 
 * header record:
@@ -59,10 +59,10 @@ void sequential_access();
 void rel_read();
 void rel_update();
 void rel_delete();
-void add_taxi(FILE* tfd);
+void add_aedv(FILE* tfd);
 void init_file();
 int open_file(int , char* argv[], int );
-void taxi_initiator();
-void read_activevehicle(taxis**);
-void read_ordersfile(taxis** taxi_);
+void aedv_initiator();
+void read_activevehicle(aedvs**);
+void read_ordersfile(aedvs** aedv_);
 void getmapsize(int* street, int* avenue);

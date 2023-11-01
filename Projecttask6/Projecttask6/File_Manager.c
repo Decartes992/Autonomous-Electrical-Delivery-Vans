@@ -8,13 +8,13 @@
 /*MODULE: FILE_MANAGER
 *
 * WHAT IT DOES:THE FILE MANAGER MODULE IS PURPOSED TO HANDLE IO RELATED TO FILES
-* AND FOR ASSIGNING ORDERS TO THE TAXIS
+* AND FOR ASSIGNING ORDERS TO THE AEDVS
 *
-* DATE: 10-11-2022
+* DATE: 10-29-2023
 *
 * NAME:
 * IFTEKHAR RAFI
-* MAZEN
+* WILLIAM THORNTON
 *
 */
 
@@ -27,10 +27,10 @@
 #include <fcntl.h>     /* for _O_TEXT and _O_BINARY */
 #include "File_Manager.h"
 
-FILE* tfd;  /* Taxi file file-descriptor */
-FILE* activevehicle; /*Active taxi file*/
-taxis* start_orders;
-taxis* start_active;
+FILE* tfd;  /* AEDV file file-descriptor */
+FILE* activevehicle; /*Active AEDV file*/
+aedvs* start_orders;
+aedvs* start_active;
 FILE* orders;
 FILE* map;
 FILE* chargingandparking;
@@ -40,7 +40,7 @@ int activeVIN[ACTIVEVEHICLECOUNT];
 void file_manager(int argc, char* argv[])
 {
 	int street, avenue, go_back_to_menu;
-	int CONTINUE = 1, rwu = 0, ans, check_if_to_run_emulation_of_taxis = 0;
+	int CONTINUE = 1, rwu = 0, ans, check_if_to_run_emulation_of_aedvs = 0;
 	getmapsize(&street, &avenue);
 	dud_map(street, avenue);
 
@@ -68,10 +68,10 @@ void file_manager(int argc, char* argv[])
 			/*Write*/
 			else if (rwu == 1) {
 
-				/* Add at least one taxi */
+				/* Add at least one aedv */
 				do
 				{
-					add_taxi(tfd);
+					add_aedv(tfd);
 					printf("Add another (1 - yes 0 - no)\n");
 					scanf_s("%d", &ans);
 					getchar();
@@ -199,7 +199,7 @@ int open_file(int argc, char* argv[], int must_exist)
 			 - File must exist but wasn't supplied
 			 - Ask for name
 			*/
-			printf("Name required - Enter name of taxi file\n");
+			printf("Name required - Enter name of aedv file\n");
 			fgets(fname, NAMELEN, stdin);
 			TRUNCATE(fname);
 			/*
@@ -227,7 +227,7 @@ int open_file(int argc, char* argv[], int must_exist)
 	 - argc = 1
 	 - ask for new file
 	*/
-	printf("Enter name of taxi file\n\n");
+	printf("Enter name of aedv file\n\n");
 	fgets(fname, NAMELEN, stdin);
 	TRUNCATE(fname);
 	/* Try to open for reading and writing */
@@ -235,17 +235,17 @@ int open_file(int argc, char* argv[], int must_exist)
 }
 void sequential_access()
 {
-	/* Read the fixed-length taxi file sequentially */
-	SFREC taxi_rec;
+	/* Read the fixed-length aedv file sequentially */
+	SFREC aedv_rec;
 	HEADER header_rec;
-	long taxirec_no, adjustedcount;
+	long aedvrec_no, adjustedcount;
 
 	/* Position file pointer to start-of-file (header) */
 	fseek(tfd, 0, SEEK_SET);
 
 	/*
 	 - Read header record - in zeroth record
-	 - Indicates first available taxi id
+	 - Indicates first available aedv id
 	*/
 	fread(&header_rec, sizeof(HEADER), 1, tfd);
 
@@ -257,33 +257,33 @@ void sequential_access()
 		return;
 	}
 
-	/* Position file pointer to first possible taxi record */
+	/* Position file pointer to first possible aedv record */
 	fseek(tfd, sizeof(SFREC), SEEK_SET);
 
 	/*
-	 * Read taxis records:
-	 * Limit is first available taxi id (from header)
+	 * Read aedvs records:
+	 * Limit is first available aedv id (from header)
 	 * Read will be successful (non-zero return value) until end-of-file,
 	   when a zero value is returned, causing the while to terminate
 	*/
 
-	taxirec_no = 1; /* Default first record */
+	aedvrec_no = 1; /* Default first record */
 	adjustedcount = header_rec.first_VIN + VINADJUST;
-	while (taxirec_no < adjustedcount &&	fread(&taxi_rec, sizeof(SFREC), 1, tfd))
+	while (aedvrec_no < adjustedcount &&	fread(&aedv_rec, sizeof(SFREC), 1, tfd))
 	{
-		switch (taxi_rec.taxirec.status)
+		switch (aedv_rec.aedvrec.status)
 		{
 		case ACTIVE:
 			/* Active record */
-			printf("%3d Active ID: %4d, Battery: %d%%, Current location: Building Number: %d , Building side: %d Location: (%d,%d)\n", taxirec_no, taxi_rec.taxirec.VIN, taxi_rec.taxirec.battery, taxi_rec.taxirec.current.buildingl, taxi_rec.taxirec.current.buildingside, taxi_rec.taxirec.current.gridl.X, taxi_rec.taxirec.current.gridl.Y);
+			printf("%3d Active ID: %4d, Battery: %d%%, Current location: Building Number: %d , Building side: %d Location: (%d,%d)\n", aedvrec_no, aedv_rec.aedvrec.VIN, aedv_rec.aedvrec.battery, aedv_rec.aedvrec.current.buildingl, aedv_rec.aedvrec.current.buildingside, aedv_rec.aedvrec.current.gridl.X, aedv_rec.aedvrec.current.gridl.Y);
 			break;
 		case DELETED:
 			/* Deleted record */
 			break;
 		default:
-			printf("%3d Invalid record: Status: %d\n", taxirec_no, taxi_rec.taxirec.status);
+			printf("%3d Invalid record: Status: %d\n", aedvrec_no, aedv_rec.aedvrec.status);
 		}
-		taxirec_no++; /* Walk through sequentially */
+		aedvrec_no++; /* Walk through sequentially */
 	}
 
 	/* Print list of deleted record */
@@ -292,27 +292,27 @@ void sequential_access()
 	else
 	{
 		/* At least one deleted record */
-		taxirec_no = header_rec.del_rec_list; /* First in list */
+		aedvrec_no = header_rec.del_rec_list; /* First in list */
 		do
 		{
-			printf("Record: %d deleted\n", taxirec_no);
+			printf("Record: %d deleted\n", aedvrec_no);
 			/* Get next deleted record from current deleted record */
-			fseek(tfd, taxirec_no * sizeof(SFREC), SEEK_SET);
-			fread(&taxi_rec, sizeof(SFREC), 1, tfd);
-			taxirec_no = taxi_rec.drec.next_deleted;
-		} while (taxirec_no != DEL_END);
+			fseek(tfd, aedvrec_no * sizeof(SFREC), SEEK_SET);
+			fread(&aedv_rec, sizeof(SFREC), 1, tfd);
+			aedvrec_no = aedv_rec.drec.next_deleted;
+		} while (aedvrec_no != DEL_END);
 	}
 }
 void rel_read()
 {
-	/* Access any taxi record regardless of its location in the
+	/* Access any aedv record regardless of its location in the
 	   file (direct/relative access).
-	 * Limited by number of possible taxis (from header record)
-	 * This is *not* accessing records using the taxi number, instead
+	 * Limited by number of possible AEDVs (from header record)
+	 * This is *not* accessing records using the AEDV number, instead
 	   it is using the record number.  How to access using a key other than
 	   the record number will be discussed in class.
 	*/
-	SFREC taxi_rec;
+	SFREC aedv_rec;
 	HEADER hrec;
 	long rec_no, adjustedcount;
 
@@ -322,7 +322,7 @@ void rel_read()
 	adjustedcount = hrec.first_VIN + VINADJUST;
 	do
 	{
-		printf("Enter taxi record number (0 to end)\n");
+		printf("Enter AEDV record number (0 to end)\n");
 		scanf_s("%d", &rec_no);
 		getchar();
 		/* Valid record? */
@@ -337,12 +337,12 @@ void rel_read()
 				 - Once the file pointer is moved, the record, if it exists,
 				   is read.
 				*/
-				fread(&taxi_rec, sizeof(taxis), 1, tfd);
+				fread(&aedv_rec, sizeof(aedvs), 1, tfd);
 				/* Record exists - is it active? */
-				if (taxi_rec.taxirec.status == ACTIVE)
+				if (aedv_rec.aedvrec.status == ACTIVE)
 				{
 					/* Active record */
-					printf("%3d Active ID: %4d, Battery: %3d%%, Current location: Building Number: %d , Building side: %d Location: (%d,%d)\n", rec_no, taxi_rec.taxirec.VIN, taxi_rec.taxirec.battery, taxi_rec.taxirec.current.buildingl, taxi_rec.taxirec.current.buildingside, taxi_rec.taxirec.current.gridl.X, taxi_rec.taxirec.current.gridl.Y);
+					printf("%3d Active ID: %4d, Battery: %3d%%, Current location: Building Number: %d , Building side: %d Location: (%d,%d)\n", rec_no, aedv_rec.aedvrec.VIN, aedv_rec.aedvrec.battery, aedv_rec.aedvrec.current.buildingl, aedv_rec.aedvrec.current.buildingside, aedv_rec.aedvrec.current.gridl.X, aedv_rec.aedvrec.current.gridl.Y);
 
 				}
 				else
@@ -353,16 +353,16 @@ void rel_read()
 	printf("Reading finished\n");
 
 }
-void add_taxi(FILE* tfd)
+void add_aedv(FILE* tfd)
 {
-	/* Add a taxi to the taxi file */
-	DEL_TAXI deltaxi;
-	SFREC newtaxi;
+	/* Add a aedv to the aedv file */
+	DEL_AEDV delaedv;
+	SFREC newaedv;
 	HEADER hrec;
 	long del_rec_no;
 	long VIN;
 	int x_current_offset = 0, y_current_offset = 0;
-	/* Access header record to get first available taxi id */
+	/* Access header record to get first available aedv id */
 	fseek(tfd, 0, SEEK_SET);
 	fread(&hrec, sizeof(HEADER), 1, tfd);
 
@@ -379,30 +379,30 @@ void add_taxi(FILE* tfd)
 			getchar();
 			return;
 		}
-		/* Read deleted taxi record to get next deleted */
-		fread(&deltaxi, sizeof(DEL_TAXI), 1, tfd);
+		/* Read deleted aedv record to get next deleted */
+		fread(&delaedv, sizeof(DEL_AEDV), 1, tfd);
 		/* Update del_rec_list in header */
-		hrec.del_rec_list = deltaxi.next_deleted;
+		hrec.del_rec_list = delaedv.next_deleted;
 		/*
 		 - del_rec_no is the number of the to-be-reused record
 		 - VIN is now del_rec_no
 		 - Header (hrec) is updated with next del_rec_list (below)
 		*/
-		printf("Reusing deleted taxi id: %u\n", del_rec_no);
+		printf("Reusing deleted AEDV id: %u\n", del_rec_no);
 		VIN = del_rec_no;
 	}
 	else
 	{
 		/*
 		 - No deleted records - get new VIN
-		 - Get taxi information
+		 - Get AEDV information
 		 - VIN is used as offset - keep in range
 		*/
-		printf("New taxi id is: %u\n", hrec.first_VIN);
+		printf("New AEDV id is: %u\n", hrec.first_VIN);
 		VIN = hrec.first_VIN + VINADJUST;
 	}
 
-	/* Move to taxi record (new or formerly deleted) */
+	/* Move to AEDV record (new or formerly deleted) */
 	if (fseek(tfd, (VIN - VINADJUST) * sizeof(SFREC), SEEK_SET) < 0)
 	{
 		printf("Invalid VIN\n");
@@ -415,30 +415,30 @@ void add_taxi(FILE* tfd)
 	*/
 	/* Get record */
 	printf("Enter starting building number\n");
-	scanf_s("%d", &newtaxi.taxirec.current.buildingl);
+	scanf_s("%d", &newaedv.aedvrec.current.buildingl);
 	printf("Enter starting building side\n");
-	scanf_s("%d", &newtaxi.taxirec.current.buildingside);
+	scanf_s("%d", &newaedv.aedvrec.current.buildingside);
 	printf("Enter Battery Percentage (Number Only): \n");
-	scanf_s("%d", &newtaxi.taxirec.battery);
+	scanf_s("%d", &newaedv.aedvrec.battery);
 
 
 
 	/* Complete remaining fields */
-	newtaxi.taxirec.VIN = VIN;
-	newtaxi.taxirec.status = ACTIVE;
+	newaedv.aedvrec.VIN = VIN;
+	newaedv.aedvrec.status = ACTIVE;
 
-	get_offset(newtaxi.taxirec.current.buildingside, &x_current_offset, &y_current_offset);
-	newtaxi.taxirec.current.gridl.X = buildingz[newtaxi.taxirec.current.buildingl].B_address.X + x_current_offset;
-	newtaxi.taxirec.current.gridl.Y = buildingz[newtaxi.taxirec.current.buildingl].B_address.Y + y_current_offset;
+	get_offset(newaedv.aedvrec.current.buildingside, &x_current_offset, &y_current_offset);
+	newaedv.aedvrec.current.gridl.X = buildingz[newaedv.aedvrec.current.buildingl].B_address.X + x_current_offset;
+	newaedv.aedvrec.current.gridl.Y = buildingz[newaedv.aedvrec.current.buildingl].B_address.Y + y_current_offset;
 
 	/* Display complete record */
-	printf("ID: >%d< BN: >%d< BS: >%d<\n", newtaxi.taxirec.VIN, newtaxi.taxirec.current.buildingl, newtaxi.taxirec.current.buildingside);
+	printf("ID: >%d< BN: >%d< BS: >%d<\n", newaedv.aedvrec.VIN, newaedv.aedvrec.current.buildingl, newaedv.aedvrec.current.buildingside);
 	/*
-	 - Write taxi data to taxi file
-	 - File pointer was positioned to taxi record
+	 - Write aedv data to aedv file
+	 - File pointer was positioned to aedv record
 	   with fseek() above
 	*/
-	fwrite(&newtaxi, sizeof(SFREC), 1, tfd);
+	fwrite(&newaedv, sizeof(SFREC), 1, tfd);
 	/*
 	 - first_VIN is either:
 		- Updated with new first available (first_VIN + 1)
@@ -455,14 +455,14 @@ void add_taxi(FILE* tfd)
 }
 void rel_delete()
 {
-	/* Access any taxi record regardless of its location in the
+	/* Access any AEDV record regardless of its location in the
 	   file (direct/relative access).
-	 * Limited by number of possible taxis (from header record)
-	 * This is *not* accessing records using the taxi number, instead
+	 * Limited by number of possible AEDVs (from header record)
+	 * This is *not* accessing records using the AEDV number, instead
 	   it is using the record number.  How to access using a key other than
 	   the record number will be discussed in class.
 	*/
-	DEL_TAXI taxi_rec;
+	DEL_AEDV aedv_rec;
 	HEADER hrec;
 	long rec_no;
 
@@ -472,7 +472,7 @@ void rel_delete()
 
 	do
 	{
-		printf("Enter taxi record number to delete (0 to end)\n");
+		printf("Enter AEDV record number to delete (0 to end)\n");
 		scanf_s("%d", &rec_no);
 		getchar();
 		/* Valid record? */
@@ -484,26 +484,26 @@ void rel_delete()
 				/* Record to be delete - position record */
 				fseek(tfd, rec_no * sizeof(SFREC), SEEK_SET);
 				/* Read record */
-				fread(&taxi_rec, sizeof(DEL_TAXI), 1, tfd);
+				fread(&aedv_rec, sizeof(DEL_AEDV), 1, tfd);
 				/* Is record active? */
-				switch (taxi_rec.status)
+				switch (aedv_rec.status)
 				{
 				case ACTIVE:
-					taxi_rec.status = DELETED;
+					aedv_rec.status = DELETED;
 					/* Update deleted link */
-					taxi_rec.next_deleted = hrec.del_rec_list;
+					aedv_rec.next_deleted = hrec.del_rec_list;
 					hrec.del_rec_list = rec_no;
 					/* Reposition file position back to rec_no */
 					fseek(tfd, rec_no * sizeof(SFREC), SEEK_SET);
 					/* Now write */
-					fwrite(&taxi_rec, sizeof(DEL_TAXI), 1, tfd);
+					fwrite(&aedv_rec, sizeof(DEL_AEDV), 1, tfd);
 					printf("Record %u deleted\n", rec_no);
 					break;
 				case DELETED:
 					printf("Record %u already deleted\n", rec_no);
 					break;
 				default:
-					printf("Record %u - Invalid status %d\n", rec_no, taxi_rec.status);
+					printf("Record %u - Invalid status %d\n", rec_no, aedv_rec.status);
 				}
 			}
 	} while (rec_no > 0);
@@ -514,13 +514,13 @@ void rel_delete()
 }
 void rel_update()
 {
-	/* Update any taxi record regardless of its location in the
+	/* Update any AEDV record regardless of its location in the
 	   file (direct access).
-	 * This is *not* accessing records using the taxi number, instead
+	 * This is *not* accessing records using the AEDV number, instead
 	   it is using the record number.  How to access using a key other
 	   than the record number will be discussed in class.
 	 */
-	SFREC taxi_rec;
+	SFREC aedv_rec;
 	HEADER hrec;
 	int choice;
 	long rec_no;
@@ -530,7 +530,7 @@ void rel_update()
 
 	do
 	{
-		printf("Enter taxi record number (0 to end)\n");
+		printf("Enter AEDV record number (0 to end)\n");
 		scanf_s("%d", &rec_no);
 
 		if (rec_no >= hrec.first_VIN)
@@ -546,11 +546,11 @@ void rel_update()
 				   of the record.  Once changed, the record is written
 				   back to the file.
 				 */
-				fread(&taxi_rec, sizeof(SFREC), 1, tfd);
-				if (taxi_rec.taxirec.status == ACTIVE)
+				fread(&aedv_rec, sizeof(SFREC), 1, tfd);
+				if (aedv_rec.aedvrec.status == ACTIVE)
 				{
 					printf("Record %4d found\n", rec_no);
-					printf("%d %d %d %d\n",taxi_rec.taxirec.VIN,taxi_rec.taxirec.current.buildingl, taxi_rec.taxirec.current.buildingside, taxi_rec.taxirec.battery);
+					printf("%d %d %d %d\n", aedv_rec.aedvrec.VIN, aedv_rec.aedvrec.current.buildingl, aedv_rec.aedvrec.current.buildingside, aedv_rec.aedvrec.battery);
 					/* Ask user for choice - repeat until zero */
 					printf("Which field is to be changed? (0: Stop, 1: Current Building, 2: Building Side and 3: Battery Status)\n");
 					scanf_s("%d", &choice);
@@ -561,18 +561,18 @@ void rel_update()
 						{
 						case 1: /* Current Building */
 							printf("Enter new Current Building\n");
-							scanf_s("%d", &taxi_rec.taxirec.current.buildingl);
-							printf("New LN: >>%d<<\n", taxi_rec.taxirec.current.buildingl);
+							scanf_s("%d", &aedv_rec.aedvrec.current.buildingl);
+							printf("New LN: >>%d<<\n", aedv_rec.aedvrec.current.buildingl);
 							break;
 						case 2: /* Building Side */
 							printf("Enter new Building Side\n");
-							scanf_s("%d", &taxi_rec.taxirec.current.buildingside);
-							printf("New LN: >>%d<<\n", taxi_rec.taxirec.current.buildingside);
+							scanf_s("%d", &aedv_rec.aedvrec.current.buildingside);
+							printf("New LN: >>%d<<\n", aedv_rec.aedvrec.current.buildingside);
 							break;
 						case 3: /* Battery Percentage */
 							printf("Enter new Battery Percentage\n");
-							scanf_s("%d", &taxi_rec.taxirec.battery);
-							printf("New LN: >>%d<<\n", taxi_rec.taxirec.battery);
+							scanf_s("%d", &aedv_rec.aedvrec.battery);
+							printf("New LN: >>%d<<\n", aedv_rec.aedvrec.battery);
 							break;
 						default:
 							printf("Unknown field: %d\n", choice);
@@ -589,7 +589,7 @@ void rel_update()
 					 */
 					fseek(tfd, rec_no * sizeof(SFREC), SEEK_SET);
 					/* Now the record can be written to the file */
-					fwrite(&taxi_rec, sizeof(SFREC), 1, tfd);
+					fwrite(&aedv_rec, sizeof(SFREC), 1, tfd);
 				}
 				else
 					printf("Record %d is not active\n", rec_no);
@@ -597,15 +597,15 @@ void rel_update()
 	} while (rec_no > 0);
 
 }
-void read_activevehicle(taxis ** taxi_) {
+void read_activevehicle(aedvs ** aedv_) {
 
-	taxis curr;
+	aedvs curr;
 
 	_set_fmode(_O_TEXT);
 
 	char fname[NAMELEN];
 
-	printf("Name required - Enter name of active taxi file\n");
+	printf("Name required - Enter name of active AEDV file\n");
 	fgets(fname, NAMELEN, stdin);
 	TRUNCATE(fname);
 
@@ -616,15 +616,15 @@ void read_activevehicle(taxis ** taxi_) {
 
 	while (fscanf_s(activevehicle, "%d", &curr.VIN) != EOF)
 	{
-		add_to_taxi_list(taxi_, curr);
+		add_to_aedv_list(aedv_, curr);
 	}
 
 	fclose(activevehicle);
 	getchar();
 
 }
-void read_ordersfile(taxis ** taxi_) {
-	taxis curr;
+void read_ordersfile(aedvs ** aedv_) {
+	aedvs curr;
 
 	_set_fmode(_O_TEXT);
 
@@ -642,17 +642,17 @@ void read_ordersfile(taxis ** taxi_) {
 	{
 		//printf("%d	%d	%d	%d	%d\n", curr.ordertime, curr.source.buildingl, curr.source.buildingside, curr.destination.buildingl, curr.destination.buildingside);
 		set_location(&curr);
-		add_to_taxi_list(taxi_, curr);
+		add_to_aedv_list(aedv_, curr);
 	}
 	fclose(orders);
 	getchar();
 }
-void taxi_initiator() {
-	SFREC taxi_rec;
+void aedv_initiator() {
+	SFREC aedv_rec;
 	HEADER hrec;
 	long rec_no, adjustedcount;
 	int i = 0;
-	taxis* curr;
+	aedvs* curr;
 	int x_current_offset, y_current_offset;
 
 	/* Read header, indicates last allowable record */
@@ -682,36 +682,36 @@ void taxi_initiator() {
 				 - Once the file pointer is moved, the record, if it exists,
 				   is read.
 				*/
-				fread(&taxi_rec, sizeof(taxis), 1, tfd);
+				fread(&aedv_rec, sizeof(aedvs), 1, tfd);
 				/* Record exists - is it active? */
-				if (taxi_rec.taxirec.status == ACTIVE)
+				if (aedv_rec.aedvrec.status == ACTIVE)
 				{
 
 					/* Active record */
-					taxi_rec.taxirec.VIN = curr->VIN;
+					aedv_rec.aedvrec.VIN = curr->VIN;
 
-					get_offset(taxi_rec.taxirec.current.buildingside, &x_current_offset, &y_current_offset);
+					get_offset(aedv_rec.aedvrec.current.buildingside, &x_current_offset, &y_current_offset);
 
-					// set current for taxi
-					taxi_rec.taxirec.current.gridl.X = buildingz[taxi_rec.taxirec.current.buildingl].B_address.X + x_current_offset;
-					taxi_rec.taxirec.current.gridl.Y = buildingz[taxi_rec.taxirec.current.buildingl].B_address.Y + y_current_offset;
+					// set current for AEDV
+					aedv_rec.aedvrec.current.gridl.X = buildingz[aedv_rec.aedvrec.current.buildingl].B_address.X + x_current_offset;
+					aedv_rec.aedvrec.current.gridl.Y = buildingz[aedv_rec.aedvrec.current.buildingl].B_address.Y + y_current_offset;
 
-					taxi_rec.taxirec.source.gridl.X = taxi_rec.taxirec.current.gridl.X;
-					taxi_rec.taxirec.source.gridl.Y = taxi_rec.taxirec.current.gridl.Y;
-					taxi_rec.taxirec.destination.gridl.X = taxi_rec.taxirec.current.gridl.X;
-					taxi_rec.taxirec.destination.gridl.Y = taxi_rec.taxirec.current.gridl.Y;
-
-
-					taxi_rec.taxirec.source.intersection_location.X = taxi_rec.taxirec.current.gridl.X;
-					taxi_rec.taxirec.source.intersection_location.Y = taxi_rec.taxirec.current.gridl.Y;
-					taxi_rec.taxirec.destination.intersection_location.X = taxi_rec.taxirec.current.gridl.X;
-					taxi_rec.taxirec.destination.intersection_location.Y = taxi_rec.taxirec.current.gridl.Y;
+					aedv_rec.aedvrec.source.gridl.X = aedv_rec.aedvrec.current.gridl.X;
+					aedv_rec.aedvrec.source.gridl.Y = aedv_rec.aedvrec.current.gridl.Y;
+					aedv_rec.aedvrec.destination.gridl.X = aedv_rec.aedvrec.current.gridl.X;
+					aedv_rec.aedvrec.destination.gridl.Y = aedv_rec.aedvrec.current.gridl.Y;
 
 
-					printf("%3d Active ID: %4d, Battery: %d%%, Current location: Building Number: %d , Building side: %d Location: (%d,%d)\n", rec_no, taxi_rec.taxirec.VIN, taxi_rec.taxirec.battery, taxi_rec.taxirec.current.buildingl, taxi_rec.taxirec.current.buildingside, taxi_rec.taxirec.current.gridl.X, taxi_rec.taxirec.current.gridl.Y);
+					aedv_rec.aedvrec.source.intersection_location.X = aedv_rec.aedvrec.current.gridl.X;
+					aedv_rec.aedvrec.source.intersection_location.Y = aedv_rec.aedvrec.current.gridl.Y;
+					aedv_rec.aedvrec.destination.intersection_location.X = aedv_rec.aedvrec.current.gridl.X;
+					aedv_rec.aedvrec.destination.intersection_location.Y = aedv_rec.aedvrec.current.gridl.Y;
 
 
-					add_to_taxi_list(&start_parked, taxi_rec.taxirec);
+					printf("%3d Active ID: %4d, Battery: %d%%, Current location: Building Number: %d , Building side: %d Location: (%d,%d)\n", rec_no, aedv_rec.aedvrec.VIN, aedv_rec.aedvrec.battery, aedv_rec.aedvrec.current.buildingl, aedv_rec.aedvrec.current.buildingside, aedv_rec.aedvrec.current.gridl.X, aedv_rec.aedvrec.current.gridl.Y);
+
+
+					add_to_aedv_list(&start_parked, aedv_rec.aedvrec);
 
 				}
 			}

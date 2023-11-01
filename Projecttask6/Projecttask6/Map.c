@@ -3,11 +3,11 @@
 * WHAT IT DOES: THE MAP.H AND MAP.C FILES ACHIEVE THE PURPOSE OF DRAWING THE MAP
 * AND STORING THE BUILDING LOCATION, PARKING LOCATION AND CHARGING LOCATION
 *
-* DATE: 10-11-2022
+* DATE: 10-29-2023
 *
 * NAME:
 * IFTEKHAR RAFI
-* MAZEN
+* WILLIAM THORNTON
 *
 */
 
@@ -99,8 +99,8 @@ void draw_map(int street, int avenue) {
             buildingz[marker].C_address.Y = buildingz[marker].B_address.Y + i; // THE Y VALUE OF THE CHARGING
             buildingz[marker].C_address.X = buildingz[marker].B_address.X + parkingandchargingnumberoffset; // THE X VALUE OF THE CHARGING
 
-            buildingz[marker].numberoftaxischarging = ZERO;
-            buildingz[marker].numberoftaxisparked = ZERO;
+            buildingz[marker].numberofaedvscharging = ZERO;
+            buildingz[marker].numberofaedvsparked = ZERO;
 
 
             Building_Upper_Left_X = Building_Upper_Left_X + Street_length;
@@ -145,8 +145,8 @@ void dud_map(int street, int avenue) {
             buildingz[marker].C_address.Y = buildingz[marker].B_address.Y + i; // THE Y VALUE OF THE CHARGING
             buildingz[marker].C_address.X = buildingz[marker].B_address.X + parkingandchargingnumberoffset; // THE X VALUE OF THE CHARGING
 
-            buildingz[marker].numberoftaxischarging = ZERO;
-            buildingz[marker].numberoftaxisparked = ZERO;
+            buildingz[marker].numberofaedvscharging = ZERO;
+            buildingz[marker].numberofaedvsparked = ZERO;
 
 
             Building_Upper_Left_X = Building_Upper_Left_X + Street_length;

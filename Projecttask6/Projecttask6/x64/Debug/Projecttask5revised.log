@@ -1,2 +1,2 @@
-﻿E:\Visual Studio\IDE\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(517,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (Projecttask5revised.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Projecttask5revised.vcxproj -> E:\Fall 2023\ECED 3401 Systems Analysis\Projecttask6\Projecttask6\x64\Debug\ProjectTask6.exe
+﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (Projecttask5revised.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Projecttask5revised.vcxproj -> C:\Users\12506\OneDrive - Dalhousie University\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\Projecttask6\Projecttask6\x64\Debug\ProjectTask6.exe

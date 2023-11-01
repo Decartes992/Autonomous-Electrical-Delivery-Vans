@@ -4,13 +4,13 @@
 /*MODULE: UI_MANAGER
 *
 * WHAT IT DOES:THE UI MANAGER MODULE IS PURPOSED TO HANDLE IO TO THE CONSOLE
-* AND FOR ASSIGNING ORDERS TO THE TAXIS
+* AND FOR ASSIGNING ORDERS TO THE AEDVS
 *
 * DATE: 10-11-2022
 *
 * NAME:
 * IFTEKHAR RAFI
-* MAZEN
+* WILLIAM THORNTON
 *
 */
 
@@ -26,22 +26,22 @@ FILE* chargingandparking;
 
 int activeVIN[ACTIVEVEHICLECOUNT];
 
-taxis* start_topark;
-taxis* start_topark_intersection;
+aedvs* start_topark;
+aedvs* start_topark_intersection;
 
-taxis* start_parked;
+aedvs* start_parked;
 
-taxis* start_topickup_intersection;
-taxis* start_topickup;
+aedvs* start_topickup_intersection;
+aedvs* start_topickup;
 
-taxis* start_todestination_intersection;
-taxis* start_todestination;
+aedvs* start_todestination_intersection;
+aedvs* start_todestination;
 
-taxis* start_tocharge_intersection;
-taxis* start_tocharge;
+aedvs* start_tocharge_intersection;
+aedvs* start_tocharge;
 
-taxis* start_charging;
-taxis* start_charging;
+aedvs* start_charging;
+aedvs* start_charging;
 
 void UI_Manager(int argc, char* argv[]) {
 	int whichinput = ZERO, emulationorfilemanagement = ZERO;
@@ -81,11 +81,11 @@ void UI_Manager(int argc, char* argv[]) {
 
 void take_user_input() {
 	/*VARIABLE DECLARATION*/
-	int street = ZERO, avenue = ZERO, check_if_to_run_emulation_of_taxis = ZERO;
+	int street = ZERO, avenue = ZERO, check_if_to_run_emulation_of_aedvs = ZERO;
 	int i, Numberofbuildings, Text_Position_Y;
 
-	check_if_to_run_emulation_of_taxis = get_map_size(&street, &avenue);
-	if (check_if_to_run_emulation_of_taxis != ZERO) {
+	check_if_to_run_emulation_of_aedvs = get_map_size(&street, &avenue);
+	if (check_if_to_run_emulation_of_aedvs != ZERO) {
 		return -1;
 	}
 
@@ -96,15 +96,15 @@ void take_user_input() {
 
 	ask_for_current_location(start_parked, buildingz, Numberofbuildings);
 
-	while (check_if_to_run_emulation_of_taxis == ZERO) {
+	while (check_if_to_run_emulation_of_aedvs == ZERO) {
 
-		/*ASSIGN NEW RIDE ORDER TO PARKED TAXIS*/
+		/*ASSIGN NEW RIDE ORDER TO PARKED AEDVS*/
 		ask_for_source_and_destination_and_assign_parking_location(start_parked, buildingz, Numberofbuildings);
 
-		/*MOVE ALL TAXIS AT ONCE*/
-		taxi_movement_manager();
+		/*MOVE ALL AEDVS AT ONCE*/
+		aedv_movement_manager();
 
-		check_if_to_run_emulation_of_taxis_input(&check_if_to_run_emulation_of_taxis, Text_Position_Y);
+		check_if_to_run_emulation_of_aedvs_input(&check_if_to_run_emulation_of_aedvs, Text_Position_Y);
 	}
 
 }
@@ -129,24 +129,24 @@ int get_map_size(int* street, int* avenue)
 }
 
 /*FUNCTION TO SEE WHETHER TO CONTINUE EMULATION*/
-void check_if_to_run_emulation_of_taxis_input(int* check_if_to_run_emulation_of_taxis, int Text_Position_Y)
+void check_if_to_run_emulation_of_aedvs_input(int* check_if_to_run_emulation_of_aedvs, int Text_Position_Y)
 {
 	// Ask user if they want to continue
 	move_cursor(Text_Position_Y, Indent_location);
-	printf_s("move taxis? (0 for yes and 1 for no) ");
-	scanf_s("%d", check_if_to_run_emulation_of_taxis);
+	printf_s("move aedvs? (0 for yes and 1 for no) ");
+	scanf_s("%d", check_if_to_run_emulation_of_aedvs);
 	getchar();
 }
 
-/*FUNCTION TO ASK FOR USER INPUT FOR STARTING LOCATION OF TAXIS*/
-void ask_for_current_location(taxis* head, buildings* buildingz, int Numberofbuildings)
+/*FUNCTION TO ASK FOR USER INPUT FOR STARTING LOCATION OF AEDVS*/
+void ask_for_current_location(aedvs* head, buildings* buildingz, int Numberofbuildings)
 {
 	int Text_Position_Y = buildingz[Numberofbuildings].B_address.Y + Voffsetfortext;
 	int i;
-	taxis taxi_;
+	aedvs aedv_;
 	int x_current_offset = ZERO, y_current_offset = ZERO;
 
-	for (i = 1; i <= Numerotaxi; i++) {
+	for (i = 1; i <= NumeroAEDV; i++) {
 
 		move_cursor(Text_Position_Y + cursoroffset, Indent_location);
 		printf("                                                                      \n");
@@ -155,50 +155,50 @@ void ask_for_current_location(taxis* head, buildings* buildingz, int Numberofbui
 		printf("                                                                      \n");
 
 
-		taxi_.VIN = i + offsetid;
+		aedv_.VIN = i + offsetid;
 
 		move_cursor(Text_Position_Y + cursoroffset, Indent_location);
 
-		printf("Enter the starting location for taxi%d: \n", i);
-		printf("Enter source building side of taxi%d: \n", i);
+		printf("Enter the starting location for AEDV%d: \n", i);
+		printf("Enter source building side of AEDV%d: \n", i);
 		printf("For buildingside: Enter 1 for NW, 2 for NE, 3 for SE, 4 for SW \n");
 
 
 		move_cursor(Text_Position_Y + cursoroffset, Indent_location);
 
-		printf("Enter the starting location for taxi%d: ", i);
-		scanf_s("%d", &taxi_.current.buildingl);
-		printf("Enter source building side of taxi%d: ", i);
-		scanf_s("%d", &taxi_.current.buildingside);
+		printf("Enter the starting location for AEDV%d: ", i);
+		scanf_s("%d", &aedv_.current.buildingl);
+		printf("Enter source building side of AEDV%d: ", i);
+		scanf_s("%d", &aedv_.current.buildingside);
 
 
-		if (taxi_.current.buildingl > Numberofbuildings) {
+		if (aedv_.current.buildingl > Numberofbuildings) {
 			i--;
 			printf("The starting location does not exist on the Map");
 		}
 
 			
 		else {
-			get_offset(taxi_.current.buildingside, &x_current_offset, &y_current_offset);
+			get_offset(aedv_.current.buildingside, &x_current_offset, &y_current_offset);
 
-			// set current for taxi
-			taxi_.current.gridl.X = buildingz[taxi_.current.buildingl].B_address.X + x_current_offset;
-			taxi_.current.gridl.Y = buildingz[taxi_.current.buildingl].B_address.Y + y_current_offset;
+			// set current for AEDV
+			aedv_.current.gridl.X = buildingz[aedv_.current.buildingl].B_address.X + x_current_offset;
+			aedv_.current.gridl.Y = buildingz[aedv_.current.buildingl].B_address.Y + y_current_offset;
 
-			taxi_.battery = 100; //FULL BATTERY = 100%
+			aedv_.battery = 100; //FULL BATTERY = 100%
 
-			add_to_taxi_list(&start_parked, taxi_);
+			add_to_aedv_list(&start_parked, aedv_);
 		}
 	}
 }
 
 /*FUNCTION TO GET SOURCE AND DESTINATION LOCATION AND SET PARKING LOCATION*/
-void ask_for_source_and_destination_and_assign_parking_location(taxis* head, buildings* buildingz, int Numberofbuildings)
+void ask_for_source_and_destination_and_assign_parking_location(aedvs* head, buildings* buildingz, int Numberofbuildings)
 {
 
-	taxis* curr_parked = head;
+	aedvs* curr_parked = head;
 	int Text_Position_Y = buildingz[Numberofbuildings].B_address.Y + Voffsetfortext;
-	int ask_for_whether_to_start_taxi = 1;
+	int ask_for_whether_to_start_aedv = 1;
 
 
 	while (curr_parked) {
@@ -214,41 +214,41 @@ void ask_for_source_and_destination_and_assign_parking_location(taxis* head, bui
 
 
 		move_cursor(Text_Position_Y + cursoroffset, Indent_location);
-		printf("Move taxi%d?(0 for yes): ", curr_parked->VIN);
-		scanf_s("%d", &ask_for_whether_to_start_taxi);
+		printf("Move AEDV%d?(0 for yes): ", curr_parked->VIN);
+		scanf_s("%d", &ask_for_whether_to_start_aedv);
 
 		move_cursor(Text_Position_Y + cursoroffset, Indent_location);
 
 
-		if (ask_for_whether_to_start_taxi == ZERO) {
+		if (ask_for_whether_to_start_aedv == ZERO) {
 			move_cursor(Text_Position_Y + cursoroffset, Indent_location);
 
-			printf("Enter pickup location of taxi%d:                   \n", curr_parked->VIN);
-			printf("Enter source building side of taxi%d:              \n", curr_parked->VIN);
+			printf("Enter pickup location of AEDV%d:                   \n", curr_parked->VIN);
+			printf("Enter source building side of AEDV%d:              \n", curr_parked->VIN);
 
-			printf("Enter destination location of taxi%d:              \n", curr_parked->VIN);
-			printf("Enter destination building side of taxi%d:         \n", curr_parked->VIN);
-			printf("For buildingside: Enter 1 for NW, 2 for NE, 3 for SE, 4 for SW");
+			printf("Enter destination location of AEDV%d:              \n", curr_parked->VIN);
+			printf("Enter destination building side of AEDV%d:         \n", curr_parked->VIN);
+			printf("For buildingside: Enter 1 for NW, 2 for N, 3 for NE, 4 for W, 6 for E, 7 for SE, 8 for S, 9 for SE");
 
 			move_cursor(Text_Position_Y + cursoroffset, Indent_location);
-			printf("Enter pickup location of taxi%d: ", curr_parked->VIN);
+			printf("Enter pickup location of AEDV%d: ", curr_parked->VIN);
 			scanf_s("%d", &curr_parked->source.buildingl);
-			printf("Enter source building side of taxi%d: ", curr_parked->VIN);
+			printf("Enter source building side of AEDV%d: ", curr_parked->VIN);
 			scanf_s("%d", &curr_parked->source.buildingside);
 
 			if (curr_parked->source.buildingl <= Numberofbuildings && curr_parked->source.buildingl > ZERO) {
 
-				printf("Enter destination location of taxi%d:", curr_parked->VIN);
+				printf("Enter destination location of AEDV%d:", curr_parked->VIN);
 				scanf_s("%d", &curr_parked->destination.buildingl);
-				printf("Enter destination building side of taxi%d: ", curr_parked->VIN);
+				printf("Enter destination building side of AEDV%d: ", curr_parked->VIN);
 				scanf_s("%d", &curr_parked->destination.buildingside);
 
 				set_location(curr_parked);
 
 				if (curr_parked->destination.buildingl <= Numberofbuildings && curr_parked->destination.buildingl >= ZERO) {
 
-					add_to_taxi_list(&start_topickup_intersection, *curr_parked);
-					delete_from_taxi_list(&start_parked, *curr_parked);
+					add_to_aedv_list(&start_topickup_intersection, *curr_parked);
+					delete_from_aedv_list(&start_parked, *curr_parked);
 
 					curr_parked = curr_parked->next;                          //MOVE FIRST POINTER TO THE NEXT NODE
 
@@ -267,8 +267,8 @@ void ask_for_source_and_destination_and_assign_parking_location(taxis* head, bui
 	}
 }
 
-/*FUNCTION TO SET THE SOURCE AND DESTINATION LOCATION OF TAXI*/
-void set_location(taxis* curr_parked) {
+/*FUNCTION TO SET THE SOURCE AND DESTINATION LOCATION OF AEDV*/
+void set_location(aedvs* curr_parked) {
 	int x_source_offset = ZERO, y_source_offset = ZERO, x_destination_offset = ZERO, y_destination_offset = ZERO;
 	int dist_topickup_x = ZERO, dist_topickup_y = ZERO, dist_todestination_x = ZERO, dist_todestination_y = ZERO;
 
@@ -277,11 +277,11 @@ void set_location(taxis* curr_parked) {
 	get_offset(curr_parked->destination.buildingside, &x_destination_offset, &y_destination_offset);
 
 
-	/*Set source for taxi from building location*/
+	/*Set source for AEDV from building location*/
 	curr_parked->source.gridl.X = buildingz[curr_parked->source.buildingl].B_address.X + x_source_offset;
 	curr_parked->source.gridl.Y = buildingz[curr_parked->source.buildingl].B_address.Y + y_source_offset;
 
-	/*Set destination for taxi from building location*/
+	/*Set destination for AEDV from building location*/
 	curr_parked->destination.gridl.X = buildingz[curr_parked->destination.buildingl].B_address.X + x_destination_offset;
 	curr_parked->destination.gridl.Y = buildingz[curr_parked->destination.buildingl].B_address.Y + y_destination_offset;
 
@@ -411,13 +411,13 @@ void get_offset(int comparator, int* x_offset, int* y_offset)
 }
 
 
-void print_current_destination(taxis* tomove, taxis* tomovellhead) {
+void print_current_destination(aedvs* tomove, aedvs* tomovellhead) {
 	if (tomovellhead) {
 		if (tomove == NULL) {
 			tomove = tomovellhead;
 		}
 		move_cursor(tomove->current.gridl.Y + 1, tomove->current.gridl.X);                       // postition cursor
-		printf("T%d", (tomove->VIN - offsetid));                                           // print the taxi onto screen
+		printf("V%d", (tomove->VIN - offsetid));                                           // print the AEDV onto screen
 	}
 }
 
@@ -443,7 +443,7 @@ void take_file_input(int argc, char* argv[]) {
 			/* File exists -- process records */
 			//sequential_access();
 			/* Access any record */
-			taxi_initiator();
+			aedv_initiator();
 
 			/* Close opened file -- will occur by default when file closes */
 			fclose(tfd);
@@ -453,21 +453,21 @@ void take_file_input(int argc, char* argv[]) {
 
 	while (start_orders) {
 
-		/*ASSIGN NEW RIDE ORDER TO PARKED TAXIS*/
+		/*ASSIGN NEW RIDE ORDER TO PARKED AEDVS*/
 		set_source_and_destination_and_assign_parking_location(start_parked, buildingz, Numberofbuildings);
 
-		/*MOVE ALL TAXIS AT ONCE*/
-		taxi_movement_manager();
+		/*MOVE ALL AEDVS AT ONCE*/
+		aedv_movement_manager();
 
 	}
 	getchar();
 }
 
-void set_source_and_destination_and_assign_parking_location(taxis* head, buildings* buildingz, int Numberofbuildings)
+void set_source_and_destination_and_assign_parking_location(aedvs* head, buildings* buildingz, int Numberofbuildings)
 {
 	int mindist, dist;
-	taxis* curr_parked = start_parked;
-	taxis* cur_order = start_orders;
+	aedvs* curr_parked = start_parked;
+	aedvs* cur_order = start_orders;
 
 	mindist = sqrt(squareOfNumber(cur_order->source.gridl.Y - curr_parked->current.gridl.Y) + squareOfNumber(cur_order->source.gridl.X - curr_parked->current.gridl.X));
 	while (cur_order && head) {
@@ -484,12 +484,12 @@ void set_source_and_destination_and_assign_parking_location(taxis* head, buildin
 			if (curr_parked->VIN == cur_order->VIN) {
 				cur_order->VIN = ZERO;
 				
-				copy_taxi_source_destination(cur_order, curr_parked);
+				copy_aedv_source_destination(cur_order, curr_parked);
 				set_location(curr_parked);
 
-				add_to_taxi_list(&start_topickup_intersection, *curr_parked);
-				delete_from_taxi_list(&start_parked, *curr_parked);
-				delete_from_taxi_list(&start_orders, *cur_order);
+				add_to_aedv_list(&start_topickup_intersection, *curr_parked);
+				delete_from_aedv_list(&start_parked, *curr_parked);
+				delete_from_aedv_list(&start_orders, *cur_order);
 
 			}
 			curr_parked = curr_parked->next;
