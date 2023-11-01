@@ -1,2 +1,14 @@
 ﻿C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppBuild.targets(531,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (Projecttask5revised.vcxproj).  This can lead to incorrect clean and rebuild behavior.
-  Projecttask5revised.vcxproj -> C:\Users\12506\OneDrive - Dalhousie University\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\Projecttask6\Projecttask6\x64\Debug\ProjectTask6.exe
+  UI_Manager.c
+C:\Users\iftek\OneDrive\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\Projecttask6\Projecttask6\File_Manager.h(26,1): warning C4005: 'NUL': macro redefinition
+C:\Users\iftek\OneDrive\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\Projecttask6\Projecttask6\General.h(30,1): message : see previous definition of 'NUL'
+C:\Users\iftek\OneDrive\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\Projecttask6\Projecttask6\UI_Manager.c(89,12): warning C4098: 'take_user_input': 'void' function returning a value
+C:\Users\iftek\OneDrive\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\Projecttask6\Projecttask6\UI_Manager.c(85,6): warning C4101: 'i': unreferenced local variable
+C:\Users\iftek\OneDrive\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\Projecttask6\Projecttask6\UI_Manager.c(253,18): warning C4133: '=': incompatible types - from 'aedv *' to 'aedvs *'
+C:\Users\iftek\OneDrive\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\Projecttask6\Projecttask6\UI_Manager.c(265,16): warning C4133: '=': incompatible types - from 'aedv *' to 'aedvs *'
+C:\Users\iftek\OneDrive\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\Projecttask6\Projecttask6\UI_Manager.c(478,12): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\iftek\OneDrive\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\Projecttask6\Projecttask6\UI_Manager.c(482,11): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+C:\Users\iftek\OneDrive\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\Projecttask6\Projecttask6\UI_Manager.c(486,16): warning C4133: '=': incompatible types - from 'aedv *' to 'aedvs *'
+C:\Users\iftek\OneDrive\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\Projecttask6\Projecttask6\UI_Manager.c(501,16): warning C4133: '=': incompatible types - from 'aedv *' to 'aedvs *'
+C:\Users\iftek\OneDrive\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\Projecttask6\Projecttask6\UI_Manager.c(503,13): warning C4133: '=': incompatible types - from 'aedv *' to 'aedvs *'
+  Projecttask5revised.vcxproj -> C:\Users\iftek\OneDrive\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\Projecttask6\Projecttask6\x64\Debug\ProjectTask6.exe

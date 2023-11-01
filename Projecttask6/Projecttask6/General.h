@@ -39,7 +39,7 @@
 #define VBAR 179
 
 #define MAXSIZE 100
-#define NumeroAEDV 1
+#define NumeroAEDV 4
 #define MAXMAP 5
 #define offsetid 999
 #define ZERO 0

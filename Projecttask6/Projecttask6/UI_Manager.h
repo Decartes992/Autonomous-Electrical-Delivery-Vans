@@ -43,6 +43,18 @@ void set_location(aedvs* curr_parked);
 #define x_NE 12
 #define y_NE -2
 
+#define x_N 5
+#define y_N -2
+
+#define x_E 12
+#define y_E 2
+
+#define x_W 5
+#define y_W 2
+
+#define x_S 5
+#define y_S 6
+
 #define x_NW -2
 #define y_NW -2
 

@@ -149,10 +149,10 @@ void ask_for_current_location(aedvs* head, buildings* buildingz, int Numberofbui
 	for (i = 1; i <= NumeroAEDV; i++) {
 
 		move_cursor(Text_Position_Y + cursoroffset, Indent_location);
-		printf("                                                                      \n");
-		printf("                                                                      \n");
-		printf("                                                                      \n");
-		printf("                                                                      \n");
+		printf("                                                                                                           \n");
+		printf("                                                                                                           \n");
+		printf("                                                                                                           \n");
+		printf("                                                                                                           \n");
 
 
 		aedv_.VIN = i + offsetid;
@@ -161,7 +161,7 @@ void ask_for_current_location(aedvs* head, buildings* buildingz, int Numberofbui
 
 		printf("Enter the starting location for AEDV%d: \n", i);
 		printf("Enter source building side of AEDV%d: \n", i);
-		printf("For buildingside: Enter 1 for NW, 2 for NE, 3 for SE, 4 for SW \n");
+		printf("For buildingside: Enter 1 for NW, 2 for N, 3 for NE, 4 for W, 6 for E, 7 for SE, 8 for S, 9 for SE \n");
 
 
 		move_cursor(Text_Position_Y + cursoroffset, Indent_location);
@@ -204,13 +204,13 @@ void ask_for_source_and_destination_and_assign_parking_location(aedvs* head, bui
 	while (curr_parked) {
 
 		move_cursor(Text_Position_Y + cursoroffset, Indent_location);
-		printf("                                                                      \n");
-		printf("                                                                      \n");
-		printf("                                                                      \n");
-		printf("                                                                      \n");
-		printf("                                                                      \n");
-		printf("                                                                      \n");
-		printf("                                                                      \n");
+		printf("                                                                                                                   \n");
+		printf("                                                                                                                   \n");
+		printf("                                                                                                                   \n");
+		printf("                                                                                                                   \n");
+		printf("                                                                                                                   \n");
+		printf("                                                                                                                   \n");
+		printf("                                                                                                                   \n");
 
 
 		move_cursor(Text_Position_Y + cursoroffset, Indent_location);
@@ -370,20 +370,6 @@ void set_location(aedvs* curr_parked) {
 
 #endif // DEBUG
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
 
 void get_offset(int comparator, int* x_offset, int* y_offset)
@@ -407,6 +393,26 @@ void get_offset(int comparator, int* x_offset, int* y_offset)
 	else if (comparator == SW) {
 		*x_offset = x_SW;
 		*y_offset = y_SW;
+	}
+	else if (comparator == N)
+	{
+		*x_offset = x_N;
+		*y_offset = y_N;
+	}
+	else if (comparator == E)
+	{
+		*x_offset = x_E;
+		*y_offset = y_E;
+	}
+	else if (comparator == W)
+	{
+		*x_offset = x_W;
+		*y_offset = y_W;
+	}
+	else if (comparator == S)
+	{
+		*x_offset = x_S;
+		*y_offset = y_S;
 	}
 }
 
