@@ -17,7 +17,6 @@ clock_t start, currenttime, end;
 
 
 int main(int argc, char* argv[]) {
-    //time to test
     start = clock();
     UI_Manager(argc,  argv);
     return 0;

@@ -8,7 +8,7 @@
 *
 * NAME:
 * IFTEKHAR RAFI
-* MAZEN
+* 
 *
 */
 #ifndef STRUCTURE_DEFINITION_H
@@ -31,8 +31,6 @@ enum MOVEMENT_STATUS { TOPICKUP, TODESTINATION, PARKED, CHARGING };
 
 //enum parking{zero, one, two};
                                                           //enum charging { zero, one, two };
-
-
 
 typedef struct buil {
     int B_Number;                                         // Building Number

@@ -39,9 +39,25 @@ void set_location(taxis* curr_parked);
 
 #define Indent_location 0
 
+//set x_NW, y_NW, x_NE, y_NE, x_N, y_N, x_E, y_E, x_W, y_W, x_S, y_S, x_SW, y_SW, x_SE, y_SE so that the movement of the taxi does not touch the buildings
+
+#define x_NW -2
+#define y_NW -2
 
 #define x_NE 12
 #define y_NE -2
+
+#define x_N 5
+#define y_N -2
+
+#define x_E 12
+#define y_E 2
+
+#define x_W -2
+#define y_W 2
+
+#define x_S 5
+#define y_S 6
 
 #define x_NW -2
 #define y_NW -2
@@ -50,7 +66,8 @@ void set_location(taxis* curr_parked);
 #define y_SE 6
 
 #define x_SW -2
-#define y_SW 6
+#define y_SW 6 
+
 
 
 #define intersection_increment_x 2

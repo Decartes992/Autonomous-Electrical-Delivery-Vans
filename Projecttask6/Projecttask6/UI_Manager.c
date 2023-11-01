@@ -204,13 +204,13 @@ void ask_for_source_and_destination_and_assign_parking_location(taxis* head, bui
 	while (curr_parked) {
 
 		move_cursor(Text_Position_Y + cursoroffset, Indent_location);
-		printf("                                                                      \n");
-		printf("                                                                      \n");
-		printf("                                                                      \n");
-		printf("                                                                      \n");
-		printf("                                                                      \n");
-		printf("                                                                      \n");
-		printf("                                                                      \n");
+		printf("                                                                        \n");
+		printf("                                                                        \n");
+		printf("                                                                        \n");
+		printf("                                                                        \n");
+		printf("                                                                        \n");
+		printf("                                                                        \n");
+		printf("                                                                        \n");
 
 
 		move_cursor(Text_Position_Y + cursoroffset, Indent_location);
@@ -407,6 +407,22 @@ void get_offset(int comparator, int* x_offset, int* y_offset)
 	else if (comparator == SW) {
 		*x_offset = x_SW;
 		*y_offset = y_SW;
+	}
+	else if (comparator = N) {
+		*x_offset = x_N;
+		*y_offset = y_N;
+	}
+	else if (comparator = E) {
+		*x_offset = x_E;
+		*y_offset = y_E;
+	}
+	else if (comparator = W) {
+		*x_offset = x_W;
+		*y_offset = y_W;
+	}
+	else if (comparator = S) {
+		*x_offset = x_S;
+		*y_offset = y_S;
 	}
 }
 
