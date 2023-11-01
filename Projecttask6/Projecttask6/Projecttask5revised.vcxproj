@@ -132,15 +132,15 @@
     <ClCompile Include="Main.c" />
     <ClCompile Include="Map.c" />
     <ClCompile Include="UI_Manager.c" />
-    <ClCompile Include="Taxi_Functions.c" />
-    <ClCompile Include="Taxi.c" />
+    <ClCompile Include="Aedv_Functions.c" />
+    <ClCompile Include="Aedv.c" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="General.h" />
     <ClInclude Include="File_Manager.h" />
-    <ClInclude Include="Taxi.h" />
+    <ClInclude Include="Aedv.h" />
     <ClInclude Include="UI_Manager.h" />
-    <ClInclude Include="Taxi_Functions.h" />
+    <ClInclude Include="Aedv_Functions.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Structure_definition.h" />
   </ItemGroup>

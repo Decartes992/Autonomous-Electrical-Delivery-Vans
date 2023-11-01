@@ -4,11 +4,11 @@
 * WHAT IT DOES: THE STRUCTURE_DEFINITION.H FILE IS USED TO DECLARE ALL THE STRUCTURES AND
 * USER DEFINED DATA TYPES USED IN THIS PROJECT.
 *
-* DATE: 10-11-2022
+* DATE: 10-29-2023
 *
 * NAME:
 * IFTEKHAR RAFI
-* MAZEN
+* WILLIAM THORNTON
 *
 */
 #ifndef STRUCTURE_DEFINITION_H
@@ -41,9 +41,9 @@ typedef struct buil {
     int B_Number;                                         // Building Number
     COORD B_address;                                      // Building Address
     COORD P_address;                                        //Parking Address
-    int numberoftaxisparked;
+    int numberofaedvsparked;
     COORD C_address;                                        //Charging Address
-    int numberoftaxischarging;
+    int numberofaedvscharging;
 
 } buildings;
 
@@ -52,13 +52,13 @@ buildings buildingz[MAXSIZE];
 
 typedef struct Loc {                                      //Function to store cartesian location and building number under one struct
     COORD intersection_location;
-    COORD gridl;                                          //final location of taxi
+    COORD gridl;                                          //final location of AEDV
     int buildingl;
     enum buildingsides buildingside;
 } loc;
 
 
-typedef struct taxi {
+typedef struct AEDV {
     enum REC_STATUS status;
     int ordertime;
     int VIN;
@@ -66,13 +66,13 @@ typedef struct taxi {
     loc destination;
     loc current;
     int battery;
-    struct taxi* next;
-} taxis;
+    struct aedv* next;
+} aedvs;
 
 typedef struct ORDER {
     int time;
-    taxis taxi_;
-    struct taxi* next;
+    aedvs aedv_;
+    struct aedv* next;
 } ORDERS;
 
 typedef struct orderstyle {
@@ -91,22 +91,22 @@ struct header
 };
 typedef struct header HEADER;
 
-typedef struct deleted_taxi
+typedef struct deleted_aedv
 {
     enum REC_STATUS status;
     long  next_deleted;
-}DEL_TAXI;
+}DEL_AEDV;
 
 
 
 
-union taxi_file
+union aedv_file
 {
-    taxis taxirec;
+    aedvs aedvrec;
     HEADER hrec;
-    DEL_TAXI drec;
+    DEL_AEDV drec;
 };
-typedef union taxi_file SFREC;
+typedef union aedv_file SFREC;
 
 
 

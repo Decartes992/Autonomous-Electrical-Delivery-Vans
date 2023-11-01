@@ -1,7 +1,7 @@
 /*
- - Main code for FASDETS
+ - Main code for AEDV
  - Authors-
- - Mazen Abdalla 
+ - William Thornton - B00881401
  - Iftekhar Rafi - B00871031
  - ECED 3401
 */
@@ -10,7 +10,7 @@
 #include "Map.h"
 #include "Structure_definition.h"
 #include "General.h"
-#include "Taxi_Functions.h"
+#include "Aedv_Functions.h"
 #include "UI_Manager.h"
 
 clock_t start, currenttime, end;

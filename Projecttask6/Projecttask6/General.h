@@ -4,11 +4,11 @@
 * WHAT IT DOES: THE GENERAL HEADER FILE ACHEIVE THE PURPOSE 
 * OF DECLARING THE REQUIRED GENERAL PREPROCESSOR DIRECTIVES 
 * 
-* DATE: 10-11-2022
+* DATE: 10-29-2023
 *
 * NAME:
 * IFTEKHAR RAFI
-* MAZEN
+* WILLIAM THORNTON
 *
 */
 
@@ -39,7 +39,7 @@
 #define VBAR 179
 
 #define MAXSIZE 100
-#define Numerotaxi 1
+#define NumeroAEDV 1
 #define MAXMAP 5
 #define offsetid 999
 #define ZERO 0
@@ -48,7 +48,7 @@
 #define Voffset 6
 #define cursoroffset 2
 #define Voffsetfortext 9
-#define lowbatterylevel 20	//definition for the battery level at which taxis will stop taking orders and go to charge
+#define lowbatterylevel 20	//definition for the battery level at which AEDVs will stop taking orders and go to charge
 
 
 
