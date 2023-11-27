@@ -1,0 +1,47 @@
+﻿  AEDV_FileManager.c
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\TASK6\General.h(54,1): warning C4005: 'Voffset': macro redefinition
+  (compiling source file 'AEDV_FileManager.c')
+  E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\TASK6\General.h(48,1):
+  see previous definition of 'Voffset'
+  
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\TASK6\General.h(57,1): warning C4005: 'ESC': macro redefinition
+  (compiling source file 'AEDV_FileManager.c')
+  E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\TASK6\General.h(31,1):
+  see previous definition of 'ESC'
+  
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\TASK6\UI_Manager.h(70,40): error C2065: 'ACTIVEVEHICLECOUNT': undeclared identifier
+  (compiling source file 'AEDV_FileManager.c')
+  
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\TASK6\UI_Manager.h(70,22): error C2057: expected constant expression
+  (compiling source file 'AEDV_FileManager.c')
+  
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\TASK6\UI_Manager.h(70,40): error C2466: cannot allocate an array of constant size 0
+  (compiling source file 'AEDV_FileManager.c')
+  
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\TASK6\AEDV_FileManager.h(32,1): warning C4005: 'NUL': macro redefinition
+  (compiling source file 'AEDV_FileManager.c')
+  E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\TASK6\General.h(30,1):
+  see previous definition of 'NUL'
+  
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\TASK6\AEDV_FileManager.c(41,2): warning C4013: 'dud_map' undefined; assuming extern returning int
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\TASK6\AEDV_FileManager.c(49,19): warning C4013: 'open_file' undefined; assuming extern returning int
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\TASK6\AEDV_FileManager.c(55,5): warning C4013: 'sequential_access' undefined; assuming extern returning int
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\TASK6\AEDV_FileManager.c(57,5): warning C4013: 'rel_read' undefined; assuming extern returning int
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\TASK6\AEDV_FileManager.c(70,6): warning C4013: 'add_aedv' undefined; assuming extern returning int
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\TASK6\AEDV_FileManager.c(90,5): warning C4013: 'rel_update' undefined; assuming extern returning int
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\TASK6\AEDV_FileManager.c(106,5): warning C4013: 'rel_delete' undefined; assuming extern returning int
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\TASK6\AEDV_FileManager.c(124,7): warning C4013: 'init_file' undefined; assuming extern returning int
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\TASK6\AEDV_FileManager.c(148,3): warning C4013: 'file_manager' undefined; assuming extern returning int
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\TASK6\AEDV_FileManager.c(664,8): warning C4133: '=': incompatible types - from 'aedv *' to 'aedvs *'
+  Map.c
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\TASK6\General.h(54,1): warning C4005: 'Voffset': macro redefinition
+  (compiling source file 'Map.c')
+  E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\TASK6\General.h(48,1):
+  see previous definition of 'Voffset'
+  
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\TASK6\General.h(57,1): warning C4005: 'ESC': macro redefinition
+  (compiling source file 'Map.c')
+  E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\TASK6\General.h(31,1):
+  see previous definition of 'ESC'
+  
+  Generating Code...
