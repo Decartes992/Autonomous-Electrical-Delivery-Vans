@@ -5,7 +5,7 @@
 * 
 */
 
-/*MODULE: FILE_MANAGER
+/*MODULE: manageAedvFiles
 *
 * WHAT IT DOES:THE FILE MANAGER MODULE IS PURPOSED TO HANDLE IO RELATED TO FILES
 * AND FOR ASSIGNING ORDERS TO THE AEDVS
@@ -38,7 +38,7 @@ void manageAedvFiles(int argc, char* argv[])
 	int street, avenue, go_back_to_menu;
 	int CONTINUE = 1, rwu = 0, ans, check_if_to_run_emulation_of_aedvs = 0;
 	getmapsize(&street, &avenue);
-	dud_map(street, avenue);
+	//dud_map(street, avenue);
 
 	/* Open a file for initialization */
 
@@ -46,15 +46,15 @@ void manageAedvFiles(int argc, char* argv[])
 		printf("Press 0 to Read, 1 to Write, 2 to Update, 3 to Delete, or 4 to Initiatlize a new file: ");
 		scanf_s("%d", &rwu);
 		getchar();
-		if (rwu == 4 || open_file(argc, argv, TRUE) )
+		if (rwu == 4 || openAedvFile(argc, argv, TRUE) )
 		{
 
 			/*Read*/
 			if (rwu == 0) {
 				/* File exists -- process records */
-				sequential_access();
+				sequentialAccessAedv();
 				/* Access any record */
-				rel_read();
+				readAedv();
 
 				/* Close opened file -- will occur by default when file closes */
 				fclose(tfd);
@@ -67,14 +67,14 @@ void manageAedvFiles(int argc, char* argv[])
 				/* Add at least one aedv */
 				do
 				{
-					add_aedv(tfd);
+					addAedv(tfd);
 					printf("Add another (1 - yes 0 - no)\n");
 					scanf_s("%d", &ans);
 					getchar();
 				} while (ans == 1);
 
 				/* Now print contents */
-				sequential_access();
+				sequentialAccessAedv();
 
 				fclose(tfd);
 				getchar();
@@ -85,12 +85,12 @@ void manageAedvFiles(int argc, char* argv[])
 
 				/* File exists -- process records */
 				printf("Original contents\n");
-				sequential_access();
+				sequentialAccessAedv();
 
-				rel_update();
+				updateAedv();
 
 				printf("Updated contents\n");
-				sequential_access();
+				sequentialAccessAedv();
 
 				/* Close opened file -- will occur by default when file closes */
 				fclose(tfd);
@@ -101,12 +101,12 @@ void manageAedvFiles(int argc, char* argv[])
 
 				/* File exists -- process records */
 				printf("Original contents\n");
-				sequential_access();
+				sequentialAccessAedv();
 
-				rel_delete();
+				deleteAedv();
 
 				printf("Updated contents\n");
-				sequential_access();
+				sequentialAccessAedv();
 
 				/* Close opened file -- will occur by default when file closes */
 				fclose(tfd);
@@ -119,11 +119,11 @@ void manageAedvFiles(int argc, char* argv[])
 				getchar();
 
 				if (CONTINUE == 0) {
-					if (open_file(argc, argv, FALSE))
+					if (openAedvFile(argc, argv, FALSE))
 					{
-						init_file();
+						initializeAedvFile();
 
-						sequential_access();
+						sequentialAccessAedv();
 
 						fclose(tfd);
 					}
@@ -145,7 +145,7 @@ void manageAedvFiles(int argc, char* argv[])
 		UI_Manager(argc,argv);
 	}
 	else if (go_back_to_menu == 1) {
-		file_manager(argc, argv);
+		manageAedvFiles(argc, argv);
 	}
 
 
@@ -423,7 +423,7 @@ void addAedv(FILE* tfd)
 	newaedv.aedvrec.VIN = VIN;
 	newaedv.aedvrec.status = ACTIVE;
 
-	get_offset(newaedv.aedvrec.current.buildingside, &x_current_offset, &y_current_offset);
+	GetOffset(newaedv.aedvrec.current.buildingside, &x_current_offset, &y_current_offset);
 	newaedv.aedvrec.current.gridl.X = buildingz[newaedv.aedvrec.current.buildingl].B_address.X + x_current_offset;
 	newaedv.aedvrec.current.gridl.Y = buildingz[newaedv.aedvrec.current.buildingl].B_address.Y + y_current_offset;
 
@@ -636,7 +636,7 @@ void initiateAedv() {
 					/* Active record */
 					aedv_rec.aedvrec.VIN = curr->VIN;
 
-					get_offset(aedv_rec.aedvrec.current.buildingside, &x_current_offset, &y_current_offset);
+					GetOffset(aedv_rec.aedvrec.current.buildingside, &x_current_offset, &y_current_offset);
 
 					// set current for AEDV
 					aedv_rec.aedvrec.current.gridl.X = buildingz[aedv_rec.aedvrec.current.buildingl].B_address.X + x_current_offset;
@@ -704,12 +704,12 @@ void read_ordersfile(aedvs ** aedv_) {
 
 	orders = fopen(fname, "r+");
 
-	int time;
+	//int time;
 
 	while (fscanf_s(orders, "%d	%d	%d	%d	%d", &curr.ordertime, &curr.source.buildingl, &curr.source.buildingside, &curr.destination.buildingl, &curr.destination.buildingside) != EOF)
 	{
 		//printf("%d	%d	%d	%d	%d\n", curr.ordertime, curr.source.buildingl, curr.source.buildingside, curr.destination.buildingl, curr.destination.buildingside);
-		set_location(&curr);
+		SetLocation(&curr);
 		add_to_aedv_list(aedv_, curr);
 	}
 	fclose(orders);

@@ -117,7 +117,7 @@ void aedv_movement_manager()
 
 
 
-			print_current_destination(curr_parked, start_parked);
+			PrintDestination(curr_parked, start_parked);
 
 			if (curr_intersection_for_pickup) {
 				curr_intersection_for_pickup = curr_intersection_for_pickup->next;

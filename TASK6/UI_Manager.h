@@ -18,8 +18,9 @@
 #include "Map.h"
 #include "General.h"
 #include "Aedv_Functions.h"
-#include "AEDV_FileManager.h"
 #include "Aedv.h"
+#include "AEDV_FileManager.h"
+#include "Delivery.h"
 
 /*FUNCTIONS TO TAKE USER INPUT*/
 
@@ -56,6 +57,7 @@ void GetFileInput(int argc, char* argv[]);
 // Function to set the address of the building. It takes the head of the aedvs list, the buildings list and the number of buildings as input.
 void SetAddress(aedvs* head, buildings* buildingz, int Numberofbuildings);
 
+float squareOfNumber(float number);
 
 #define Indent_location 0
 

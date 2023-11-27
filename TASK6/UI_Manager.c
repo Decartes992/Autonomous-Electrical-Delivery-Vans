@@ -66,14 +66,14 @@ void UI_Manager(int argc, char* argv[]) {
 		getchar();
 
 		if (whichinput == ZERO) {
-			take_user_input();
+			GetUserInput();
 		}
 		else if (whichinput == 1) {
-			take_file_input(argc, argv);
+			GetFileInput(argc, argv);
 		}
 	}
 	else if (emulationorfilemanagement == 1) {
-		file_manager(argc, argv);
+		manageAedvFiles(argc, argv);
 	}
 
 
@@ -84,7 +84,7 @@ void GetUserInput() {
 	int street = ZERO, avenue = ZERO, check_if_to_run_emulation_of_aedvs = ZERO;
 	int i, Numberofbuildings, Text_Position_Y;
 
-	check_if_to_run_emulation_of_aedvs = get_map_size(&street, &avenue);
+	check_if_to_run_emulation_of_aedvs = GetMapSize(&street, &avenue);
 	if (check_if_to_run_emulation_of_aedvs != ZERO) {
 		return -1;
 	}
@@ -94,17 +94,17 @@ void GetUserInput() {
 	Numberofbuildings = street * avenue;
 	Text_Position_Y = buildingz[Numberofbuildings].B_address.Y + Voffsetfortext;
 
-	ask_for_current_location(start_parked, buildingz, Numberofbuildings);
+	GetCurrentLocation(start_parked, buildingz, Numberofbuildings);
 
 	while (check_if_to_run_emulation_of_aedvs == ZERO) {
 
 		/*ASSIGN NEW RIDE ORDER TO PARKED AEDVS*/
-		ask_for_source_and_destination_and_assign_parking_location(start_parked, buildingz, Numberofbuildings);
+		GetAddress(start_parked, buildingz, Numberofbuildings);
 
 		/*MOVE ALL AEDVS AT ONCE*/
 		aedv_movement_manager();
 
-		check_if_to_run_emulation_of_aedvs_input(&check_if_to_run_emulation_of_aedvs, Text_Position_Y);
+		RunAedvsInputEmulation(&check_if_to_run_emulation_of_aedvs, Text_Position_Y);
 	}
 
 }
@@ -178,7 +178,7 @@ void GetCurrentLocation(aedvs* head, buildings* buildingz, int Numberofbuildings
 
 			
 		else {
-			get_offset(aedv_.current.buildingside, &x_current_offset, &y_current_offset);
+			GetOffset(aedv_.current.buildingside, &x_current_offset, &y_current_offset);
 
 			// set current for AEDV
 			aedv_.current.gridl.X = buildingz[aedv_.current.buildingl].B_address.X + x_current_offset;
@@ -240,7 +240,7 @@ void GetAddress(aedvs* head, buildings* buildingz, int Numberofbuildings)
 				printf("Enter destination building side of AEDV%d: ", curr_parked->VIN);
 				scanf_s("%d", &curr_parked->destination.buildingside);
 
-				set_location(curr_parked);
+				SetLocation(curr_parked);
 
 				if (curr_parked->destination.buildingl <= Numberofbuildings && curr_parked->destination.buildingl >= ZERO) {
 
@@ -269,9 +269,9 @@ void SetLocation(aedvs* curr_parked) {
 	int x_source_offset = ZERO, y_source_offset = ZERO, x_destination_offset = ZERO, y_destination_offset = ZERO;
 	int dist_topickup_x = ZERO, dist_topickup_y = ZERO, dist_todestination_x = ZERO, dist_todestination_y = ZERO;
 
-	get_offset(curr_parked->source.buildingside, &x_source_offset, &y_source_offset);
+	GetOffset(curr_parked->source.buildingside, &x_source_offset, &y_source_offset);
 
-	get_offset(curr_parked->destination.buildingside, &x_destination_offset, &y_destination_offset);
+	GetOffset(curr_parked->destination.buildingside, &x_destination_offset, &y_destination_offset);
 
 
 	/*Set source for AEDV from building location*/
@@ -440,9 +440,9 @@ void GetFileInput(int argc, char* argv[]) {
 	read_ordersfile(&start_orders);
 
 	read_activevehicle(&start_active);
-	if (open_file(argc, argv, TRUE))
+	if (openAedvFile(argc, argv, TRUE))
 	{
-			aedv_initiator();
+			initiateAedv();
 
 			/* Close opened file*/
 			fclose(tfd);
@@ -453,7 +453,7 @@ void GetFileInput(int argc, char* argv[]) {
 	while (start_orders) {
 
 		/*ASSIGN NEW RIDE ORDER TO PARKED AEDVS*/
-		set_source_and_destination_and_assign_parking_location(start_parked, buildingz, Numberofbuildings);
+		SetAddress(start_parked, buildingz, Numberofbuildings);
 
 		/*MOVE ALL AEDVS AT ONCE*/
 		aedv_movement_manager();
@@ -484,7 +484,7 @@ void SetAddress(aedvs* head, buildings* buildingz, int Numberofbuildings)
 				cur_order->VIN = ZERO;
 				
 				copy_aedv_source_destination(cur_order, curr_parked);
-				set_location(curr_parked);
+				SetLocation(curr_parked);
 
 				add_to_aedv_list(&start_topickup_intersection, *curr_parked);
 				delete_from_aedv_list(&start_parked, *curr_parked);
@@ -495,4 +495,9 @@ void SetAddress(aedvs* head, buildings* buildingz, int Numberofbuildings)
 		}
 		cur_order = cur_order->next;
 	}
+}
+
+float squareOfNumber(float number)
+{
+	return number*number;
 }

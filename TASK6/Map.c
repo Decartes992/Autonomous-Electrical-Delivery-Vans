@@ -55,11 +55,11 @@ void draw_colored_box(int upperLeftX, int upperLeftY, char* boxLabel, int boxCol
     printf(CSI "%dm", boxColor);          // Set the foreground color for the box
     printf(ESC "(0");                     // Switch to DEC line drawing character set
     CUP(upperLeftX, upperLeftY);
-    printf("lk");                   // Draw top edge of the box
+    printf("lqqk");                   // Draw top edge of the box
     CUP(upperLeftX, upperLeftY + 1);
     printf("x%sx", boxLabel);         // Draw middle part with label
     CUP(upperLeftX, upperLeftY + 2);
-    printf("mj");                   // Draw bottom edge of the box
+    printf("mqqj");                   // Draw bottom edge of the box
     printf(ESC "(B");                     // Switch back to ASCII character set
     printf(CSI "0m");                     // Reset foreground and background colors to default
 }
@@ -92,109 +92,110 @@ void draw_map(int numStreets, int numAvenues) {
 }
 
 
-#ifndef debug-map
-
-void draw_map(int street, int avenue) {
-
-    int avenuecounter, streetcounter, i = 0;
-    int Building_Upper_Left_Y = ULY_of_first_building;
-    int Building_Upper_Left_X = ULX_of_first_building;
-    int marker = 0;
-
-    printf(CSI "2J"); /* Clear screen */
-
-    for (avenuecounter = 0; avenuecounter < avenue; avenuecounter++) { // COUNTER FOR DRAWING BUILDINGS VERTICALLY
-
-        Building_Upper_Left_X = ULX_of_first_building;
-
-        for (streetcounter = 0; streetcounter < street; streetcounter++) { // COUNTER FOR DRAWING BUILDINGS HORIZONTALLY
-            box(Building_Upper_Left_X, Building_Upper_Left_Y, " ", BGGREEN);
-            //draw_box(Building_Upper_Left_Y, Building_Upper_Left_X,  (Building_Upper_Left_Y+ Width_of_building), (Building_Upper_Left_X + Length_of_building));
-            marker++;
-
-            buildingz[marker].B_address.Y = (Building_Upper_Left_Y); // THE Y VALUE OF THE BUILDING
-            buildingz[marker].B_address.X = (Building_Upper_Left_X); // THE X VALUE OF THE BUILDING
-
-            buildingz[marker].B_Number = marker;
-            i = 1;
-            printf(CSI "42m");
-            CUP(buildingz[marker].B_address.X+1, buildingz[marker].B_address.Y+1)
-                //move_cursor(buildingz[marker].B_address.Y, buildingz[marker].B_address.X);
-                printf("%d", buildingz[marker].B_Number);
-            //printf("%d", buildingz[marker].B_Number);
-            printf(ESC "(B");
-            printf(CSI "0m");
-            //CUP(buildingz[marker].B_address.X, buildingz[marker].B_address.Y);
-            //move_cursor(buildingz[marker].B_address.Y + i, buildingz[marker].B_address.X + buildingnumberoffset);
-              //  printf("%d", buildingz[marker].B_Number);
-            i++;
-            //CUP(buildingz[marker].B_address.X + parkingandchargingnumberoffset, buildingz[marker].B_address.Y + i);
-            //move_cursor(buildingz[marker].B_address.Y + i, buildingz[marker].B_address.X + parkingandchargingnumberoffset);
-              //  printf("P:");
-            buildingz[marker].P_address.Y = buildingz[marker].B_address.Y + i; // THE Y VALUE OF THE PARKING
-            buildingz[marker].P_address.X = buildingz[marker].B_address.X + parkingandchargingnumberoffset; // THE X VALUE OF THE PARKING
-
-            i++;
-            //CUP(buildingz[marker].B_address.X + parkingandchargingnumberoffset, buildingz[marker].B_address.Y + i);
-            //move_cursor(buildingz[marker].B_address.Y + i, buildingz[marker].B_address.X + parkingandchargingnumberoffset);
-              //  printf("C:");
-
-            buildingz[marker].C_address.Y = buildingz[marker].B_address.Y + i; // THE Y VALUE OF THE CHARGING
-            buildingz[marker].C_address.X = buildingz[marker].B_address.X + parkingandchargingnumberoffset; // THE X VALUE OF THE CHARGING
-
-            buildingz[marker].numberofaedvscharging = ZERO;
-            buildingz[marker].numberofaedvsparked = ZERO;
-
-
-            Building_Upper_Left_X = Building_Upper_Left_X + Street_length;
-        }
-        Building_Upper_Left_Y = Building_Upper_Left_Y+ Avenue_length;
-    }
-    //draw_box(buildingz[1].B_address.Y + outerboxulroffset, buildingz[1].B_address.X + outerboxulcoffset, buildingz[marker].B_address.Y + outerboxurroffset, buildingz[marker].B_address.X + outerboxurcoffset);
-
-}
-
-*FUNCTION TO POPULATE BUILDINGZ ARRAY WITHOUT DRAWING THE MAP*/
-void dud_map(int street, int avenue) {
-
-    int avenuecounter, streetcounter, i = 0;
-    int Building_Upper_Left_Y = ULY_of_first_building;
-    int Building_Upper_Left_X = ULX_of_first_building;
-    int marker = 0;
-
-
-
-    for (avenuecounter = 0; avenuecounter < avenue; avenuecounter++) {
-
-        Building_Upper_Left_X = ULX_of_first_building;
-
-        for (streetcounter = 0; streetcounter < street; streetcounter++) {
-            marker++;
-
-            buildingz[marker].B_address.Y = (Building_Upper_Left_Y); // THE Y VALUE OF THE BUILDING
-            buildingz[marker].B_address.X = (Building_Upper_Left_X); // THE X VALUE OF THE BUILDING
-
-            buildingz[marker].B_Number = marker;
-            i = 1;
-         
-            i++;
-          
-            buildingz[marker].P_address.Y = buildingz[marker].B_address.Y + i; // THE Y VALUE OF THE PARKING
-            buildingz[marker].P_address.X = buildingz[marker].B_address.X + parkingandchargingnumberoffset; // THE X VALUE OF THE PARKING
-
-            i++;
-           
-
-            buildingz[marker].C_address.Y = buildingz[marker].B_address.Y + i; // THE Y VALUE OF THE CHARGING
-            buildingz[marker].C_address.X = buildingz[marker].B_address.X + parkingandchargingnumberoffset; // THE X VALUE OF THE CHARGING
-
-            buildingz[marker].numberofaedvscharging = ZERO;
-            buildingz[marker].numberofaedvsparked = ZERO;
-
-
-            Building_Upper_Left_X = Building_Upper_Left_X + Street_length;
-        }
-        Building_Upper_Left_Y = Building_Upper_Left_Y + Avenue_length;
-    }
-}
-#endif // !debug-map
+//
+//#ifndef debug-map
+//
+//void draw_map(int street, int avenue) {
+//
+//    int avenuecounter, streetcounter, i = 0;
+//    int Building_Upper_Left_Y = ULY_of_first_building;
+//    int Building_Upper_Left_X = ULX_of_first_building;
+//    int marker = 0;
+//
+//    printf(CSI "2J"); /* Clear screen */
+//
+//    for (avenuecounter = 0; avenuecounter < avenue; avenuecounter++) { // COUNTER FOR DRAWING BUILDINGS VERTICALLY
+//
+//        Building_Upper_Left_X = ULX_of_first_building;
+//
+//        for (streetcounter = 0; streetcounter < street; streetcounter++) { // COUNTER FOR DRAWING BUILDINGS HORIZONTALLY
+//            box(Building_Upper_Left_X, Building_Upper_Left_Y, " ", BGGREEN);
+//            //draw_box(Building_Upper_Left_Y, Building_Upper_Left_X,  (Building_Upper_Left_Y+ Width_of_building), (Building_Upper_Left_X + Length_of_building));
+//            marker++;
+//
+//            buildingz[marker].B_address.Y = (Building_Upper_Left_Y); // THE Y VALUE OF THE BUILDING
+//            buildingz[marker].B_address.X = (Building_Upper_Left_X); // THE X VALUE OF THE BUILDING
+//
+//            buildingz[marker].B_Number = marker;
+//            i = 1;
+//            printf(CSI "42m");
+//            CUP(buildingz[marker].B_address.X+1, buildingz[marker].B_address.Y+1)
+//                //move_cursor(buildingz[marker].B_address.Y, buildingz[marker].B_address.X);
+//                printf("%d", buildingz[marker].B_Number);
+//            //printf("%d", buildingz[marker].B_Number);
+//            printf(ESC "(B");
+//            printf(CSI "0m");
+//            //CUP(buildingz[marker].B_address.X, buildingz[marker].B_address.Y);
+//            //move_cursor(buildingz[marker].B_address.Y + i, buildingz[marker].B_address.X + buildingnumberoffset);
+//              //  printf("%d", buildingz[marker].B_Number);
+//            i++;
+//            //CUP(buildingz[marker].B_address.X + parkingandchargingnumberoffset, buildingz[marker].B_address.Y + i);
+//            //move_cursor(buildingz[marker].B_address.Y + i, buildingz[marker].B_address.X + parkingandchargingnumberoffset);
+//              //  printf("P:");
+//            buildingz[marker].P_address.Y = buildingz[marker].B_address.Y + i; // THE Y VALUE OF THE PARKING
+//            buildingz[marker].P_address.X = buildingz[marker].B_address.X + parkingandchargingnumberoffset; // THE X VALUE OF THE PARKING
+//
+//            i++;
+//            //CUP(buildingz[marker].B_address.X + parkingandchargingnumberoffset, buildingz[marker].B_address.Y + i);
+//            //move_cursor(buildingz[marker].B_address.Y + i, buildingz[marker].B_address.X + parkingandchargingnumberoffset);
+//              //  printf("C:");
+//
+//            buildingz[marker].C_address.Y = buildingz[marker].B_address.Y + i; // THE Y VALUE OF THE CHARGING
+//            buildingz[marker].C_address.X = buildingz[marker].B_address.X + parkingandchargingnumberoffset; // THE X VALUE OF THE CHARGING
+//
+//            buildingz[marker].numberofaedvscharging = ZERO;
+//            buildingz[marker].numberofaedvsparked = ZERO;
+//
+//
+//            Building_Upper_Left_X = Building_Upper_Left_X + Street_length;
+//        }
+//        Building_Upper_Left_Y = Building_Upper_Left_Y+ Avenue_length;
+//    }
+//    //draw_box(buildingz[1].B_address.Y + outerboxulroffset, buildingz[1].B_address.X + outerboxulcoffset, buildingz[marker].B_address.Y + outerboxurroffset, buildingz[marker].B_address.X + outerboxurcoffset);
+//
+//}
+//
+//*FUNCTION TO POPULATE BUILDINGZ ARRAY WITHOUT DRAWING THE MAP*/
+//void dud_map(int street, int avenue) {
+//
+//    int avenuecounter, streetcounter, i = 0;
+//    int Building_Upper_Left_Y = ULY_of_first_building;
+//    int Building_Upper_Left_X = ULX_of_first_building;
+//    int marker = 0;
+//
+//
+//
+//    for (avenuecounter = 0; avenuecounter < avenue; avenuecounter++) {
+//
+//        Building_Upper_Left_X = ULX_of_first_building;
+//
+//        for (streetcounter = 0; streetcounter < street; streetcounter++) {
+//            marker++;
+//
+//            buildingz[marker].B_address.Y = (Building_Upper_Left_Y); // THE Y VALUE OF THE BUILDING
+//            buildingz[marker].B_address.X = (Building_Upper_Left_X); // THE X VALUE OF THE BUILDING
+//
+//            buildingz[marker].B_Number = marker;
+//            i = 1;
+//         
+//            i++;
+//          
+//            buildingz[marker].P_address.Y = buildingz[marker].B_address.Y + i; // THE Y VALUE OF THE PARKING
+//            buildingz[marker].P_address.X = buildingz[marker].B_address.X + parkingandchargingnumberoffset; // THE X VALUE OF THE PARKING
+//
+//            i++;
+//           
+//
+//            buildingz[marker].C_address.Y = buildingz[marker].B_address.Y + i; // THE Y VALUE OF THE CHARGING
+//            buildingz[marker].C_address.X = buildingz[marker].B_address.X + parkingandchargingnumberoffset; // THE X VALUE OF THE CHARGING
+//
+//            buildingz[marker].numberofaedvscharging = ZERO;
+//            buildingz[marker].numberofaedvsparked = ZERO;
+//
+//
+//            Building_Upper_Left_X = Building_Upper_Left_X + Street_length;
+//        }
+//        Building_Upper_Left_Y = Building_Upper_Left_Y + Avenue_length;
+//    }
+//}
+//#endif // !debug-map

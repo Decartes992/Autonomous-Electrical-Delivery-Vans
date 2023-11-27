@@ -63,7 +63,7 @@ typedef struct AEDV {
     loc destination;
     loc current;
     int battery;
-    struct aedv* next;
+    struct AEDV* next;
 } aedvs;
 
 typedef struct ORDER {

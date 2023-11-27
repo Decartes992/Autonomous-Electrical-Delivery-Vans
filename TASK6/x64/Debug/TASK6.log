@@ -1,41 +1,4 @@
-﻿  AEDV_FileManager.c
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\General.h(54,1): warning C4005: 'Voffset': macro redefinition
-  (compiling source file 'AEDV_FileManager.c')
-  C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\General.h(48,1):
-  see previous definition of 'Voffset'
-  
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\General.h(57,1): warning C4005: 'ESC': macro redefinition
-  (compiling source file 'AEDV_FileManager.c')
-  C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\General.h(31,1):
-  see previous definition of 'ESC'
-  
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\UI_Manager.h(90,40): error C2065: 'ACTIVEVEHICLECOUNT': undeclared identifier
-  (compiling source file 'AEDV_FileManager.c')
-  
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\UI_Manager.h(90,22): error C2057: expected constant expression
-  (compiling source file 'AEDV_FileManager.c')
-  
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\UI_Manager.h(90,40): error C2466: cannot allocate an array of constant size 0
-  (compiling source file 'AEDV_FileManager.c')
-  
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\AEDV_FileManager.h(32,1): warning C4005: 'NUL': macro redefinition
-  (compiling source file 'AEDV_FileManager.c')
-  C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\General.h(30,1):
-  see previous definition of 'NUL'
-  
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\AEDV_FileManager.c(41,2): warning C4013: 'dud_map' undefined; assuming extern returning int
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\AEDV_FileManager.c(49,19): warning C4013: 'open_file' undefined; assuming extern returning int
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\AEDV_FileManager.c(55,5): warning C4013: 'sequential_access' undefined; assuming extern returning int
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\AEDV_FileManager.c(57,5): warning C4013: 'rel_read' undefined; assuming extern returning int
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\AEDV_FileManager.c(70,6): warning C4013: 'add_aedv' undefined; assuming extern returning int
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\AEDV_FileManager.c(90,5): warning C4013: 'rel_update' undefined; assuming extern returning int
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\AEDV_FileManager.c(106,5): warning C4013: 'rel_delete' undefined; assuming extern returning int
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\AEDV_FileManager.c(124,7): warning C4013: 'init_file' undefined; assuming extern returning int
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\AEDV_FileManager.c(148,3): warning C4013: 'file_manager' undefined; assuming extern returning int
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\AEDV_FileManager.c(426,2): warning C4013: 'get_offset' undefined; assuming extern returning int
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\AEDV_FileManager.c(664,8): warning C4133: '=': incompatible types - from 'aedv *' to 'aedvs *'
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\AEDV_FileManager.c(712,3): warning C4013: 'set_location' undefined; assuming extern returning int
-  Map.c
+﻿  Map.c
 C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\General.h(54,1): warning C4005: 'Voffset': macro redefinition
   (compiling source file 'Map.c')
   C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\General.h(48,1):
@@ -46,24 +9,4 @@ C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\Genera
   C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\General.h(31,1):
   see previous definition of 'ESC'
   
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\Map.c(95,1): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\Map.c(97,6): error C2084: function 'void draw_map(int,int)' already has a body
-  C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\Map.c(67,6):
-  see previous definition of 'draw_map'
-  
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\Map.c(100,54): error C2065: 'ULY_of_first_building': undeclared identifier
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\Map.c(101,54): error C2065: 'ULX_of_first_building': undeclared identifier
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\Map.c(108,54): error C2065: 'ULX_of_first_building': undeclared identifier
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\Map.c(111,13): warning C4013: 'box' undefined; assuming extern returning int
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\Map.c(157,11): error C2061: syntax error: identifier 'TO'
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\Map.c(157,11): error C2059: syntax error: ';'
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\Map.c(157,23): error C2061: syntax error: identifier 'BUILDINGZ'
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\Map.c(157,23): error C2059: syntax error: ';'
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\Map.c(157,39): error C2061: syntax error: identifier 'WITHOUT'
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\Map.c(157,39): error C2059: syntax error: ';'
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\Map.c(157,55): error C2061: syntax error: identifier 'THE'
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\Map.c(157,55): error C2059: syntax error: ';'
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\Map.c(157,62): warning C4138: '*/' found outside of comment
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\Map.c(157,62): error C2143: syntax error: missing '{' before '*'
-C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\Map.c(157,63): error C2059: syntax error: '/'
-  Generating Code...
+  TASK6.vcxproj -> C:\Users\iftek\Documents\GitHub\Autonomous-Electrical-Delivery-Vans\TASK6\x64\Debug\TASK6.exe

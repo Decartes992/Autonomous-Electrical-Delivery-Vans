@@ -48,5 +48,4 @@ extern aedvs* start_charging;                                       // Start of 
 
 extern aedvs* start_orders;                                       // Start of list
 
-
 #endif //AEDV_H
