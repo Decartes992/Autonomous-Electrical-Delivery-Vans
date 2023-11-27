@@ -23,17 +23,39 @@
 
 /*FUNCTIONS TO TAKE USER INPUT*/
 
+// Function to manage the User Interface. It takes command line arguments as input.
 void UI_Manager(int argc, char* argv[]);
+
+// Function to get user input from the console.
 void GetUserInput();
+
+// Function to get the address of the building. It takes the head of the aedvs list, the buildings list and the number of buildings as input.
 void GetAddress(aedvs* head, buildings* buildingz, int Numberofbuildings);
+
+// Function to get the current location of the aedvs. It takes the head of the aedvs list, the buildings list and the number of buildings as input.
 void GetCurrentLocation(aedvs* head, buildings* buildingz, int Numberofbuildings);
+
+// Function to get the size of the map. It takes pointers to street and avenue as input and returns the size of the map.
 int GetMapSize(int* street, int* avenue);
+
+// Function to run the aedvs input emulation. It takes a pointer to check if to run emulation of aedvs and the text position Y as input.
 void RunAedvsInputEmulation(int* check_if_to_run_emulation_of_aedvs, int Text_Position_Y);
+
+// Function to print the destination of the aedvs. It takes the aedvs to move and the head of the aedvs list as input.
 void PrintDestination(aedvs* tomove, aedvs* tomovellhead);
+
+// Function to set the location of the aedvs. It takes the currently parked aedvs as input.
 void SetLocation(aedvs* curr_parked);
+
+// Function to get the offset. It takes the comparator and pointers to x_offset and y_offset as input.
 void GetOffset(int comparator, int* x_offset, int* y_offset);
+
+// Function to get file input. It takes command line arguments as input.
 void GetFileInput(int argc, char* argv[]);
+
+// Function to set the address of the building. It takes the head of the aedvs list, the buildings list and the number of buildings as input.
 void SetAddress(aedvs* head, buildings* buildingz, int Numberofbuildings);
+
 
 #define Indent_location 0
 
