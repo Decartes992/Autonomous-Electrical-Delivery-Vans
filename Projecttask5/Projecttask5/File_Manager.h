@@ -1,3 +1,6 @@
+#ifndef FILE_MANAGER_H
+#define FILE_MANAGER_H
+
 /*Header for all relative record files*/
 
 
@@ -66,3 +69,6 @@ void aedv_initiator();
 void read_activevehicle(aedvs**);
 void read_ordersfile(aedvs** aedv_);
 void getmapsize(int* street, int* avenue);
+
+#endif FILE_MANAGER_H
+

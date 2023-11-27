@@ -24,18 +24,16 @@
 /*FUNCTIONS TO TAKE USER INPUT*/
 
 void UI_Manager(int argc, char* argv[]);
-void take_user_input();
-void ask_for_source_and_destination_and_assign_parking_location(aedvs* head, buildings* buildingz, int Numberofbuildings);
-void ask_for_current_location(aedvs* head, buildings* buildingz, int Numberofbuildings);
-int get_map_size(int* street, int* avenue);
-void check_if_to_run_emulation_of_aedvs_input(int* check_if_to_run_emulation_of_aedvs, int Text_Position_Y);
-void print_current_destination(aedvs* tomove, aedvs* tomovellhead);
-void set_location(aedvs* curr_parked);
-void get_offset(int comparator, int* x_offset, int* y_offset);
-int squareOfNumber(int num);
-void take_file_input(int argc, char* argv[]);
-void set_source_and_destination_and_assign_parking_location(aedvs* head, buildings* buildingz, int Numberofbuildings);
-void set_location(aedvs* curr_parked);
+void GetUserInput();
+void GetAddress(aedvs* head, buildings* buildingz, int Numberofbuildings);
+void GetCurrentLocation(aedvs* head, buildings* buildingz, int Numberofbuildings);
+int GetMapSize(int* street, int* avenue);
+void RunAedvsInputEmulation(int* check_if_to_run_emulation_of_aedvs, int Text_Position_Y);
+void PrintDestination(aedvs* tomove, aedvs* tomovellhead);
+void SetLocation(aedvs* curr_parked);
+void GetOffset(int comparator, int* x_offset, int* y_offset);
+void GetFileInput(int argc, char* argv[]);
+void SetAddress(aedvs* head, buildings* buildingz, int Numberofbuildings);
 
 #define Indent_location 0
 

@@ -79,7 +79,7 @@ void UI_Manager(int argc, char* argv[]) {
 
 }
 
-void take_user_input() {
+void GetUserInput() {
 	/*VARIABLE DECLARATION*/
 	int street = ZERO, avenue = ZERO, check_if_to_run_emulation_of_aedvs = ZERO;
 	int i, Numberofbuildings, Text_Position_Y;
@@ -110,7 +110,7 @@ void take_user_input() {
 }
 
 /*FUNCTION TO GET NUMBER OF STREETS AND AVENUES*/
-int get_map_size(int* street, int* avenue)
+int GetMapSize(int* street, int* avenue)
 {
 	printf("Enter Number of streets [Maximum 5]: ");
 	scanf_s("%d", street);
@@ -129,7 +129,7 @@ int get_map_size(int* street, int* avenue)
 }
 
 /*FUNCTION TO SEE WHETHER TO CONTINUE EMULATION*/
-void check_if_to_run_emulation_of_aedvs_input(int* check_if_to_run_emulation_of_aedvs, int Text_Position_Y)
+void RunAedvsInputEmulation(int* check_if_to_run_emulation_of_aedvs, int Text_Position_Y)
 {
 	// Ask user if they want to continue
 	CUP(Indent_location, Text_Position_Y)
@@ -139,7 +139,7 @@ void check_if_to_run_emulation_of_aedvs_input(int* check_if_to_run_emulation_of_
 }
 
 /*FUNCTION TO ASK FOR USER INPUT FOR STARTING LOCATION OF AEDVS*/
-void ask_for_current_location(aedvs* head, buildings* buildingz, int Numberofbuildings)
+void GetCurrentLocation(aedvs* head, buildings* buildingz, int Numberofbuildings)
 {
 	int Text_Position_Y = buildingz[Numberofbuildings].B_address.Y + Voffsetfortext;
 	int i;
@@ -192,7 +192,7 @@ void ask_for_current_location(aedvs* head, buildings* buildingz, int Numberofbui
 }
 
 /*FUNCTION TO GET SOURCE AND DESTINATION LOCATION AND SET PARKING LOCATION*/
-void ask_for_source_and_destination_and_assign_parking_location(aedvs* head, buildings* buildingz, int Numberofbuildings)
+void GetAddress(aedvs* head, buildings* buildingz, int Numberofbuildings)
 {
 
 	aedvs* curr_parked = head;
@@ -265,7 +265,7 @@ void ask_for_source_and_destination_and_assign_parking_location(aedvs* head, bui
 }
 
 /*FUNCTION TO SET THE SOURCE AND DESTINATION LOCATION OF AEDV*/
-void set_location(aedvs* curr_parked) {
+void SetLocation(aedvs* curr_parked) {
 	int x_source_offset = ZERO, y_source_offset = ZERO, x_destination_offset = ZERO, y_destination_offset = ZERO;
 	int dist_topickup_x = ZERO, dist_topickup_y = ZERO, dist_todestination_x = ZERO, dist_todestination_y = ZERO;
 
@@ -369,7 +369,7 @@ void set_location(aedvs* curr_parked) {
 
 }
 
-void get_offset(int comparator, int* x_offset, int* y_offset)
+void GetOffset(int comparator, int* x_offset, int* y_offset)
 {
 
 	/*North*/
@@ -414,7 +414,7 @@ void get_offset(int comparator, int* x_offset, int* y_offset)
 }
 
 
-void print_current_destination(aedvs* tomove, aedvs* tomovellhead) {
+void PrintDestination(aedvs* tomove, aedvs* tomovellhead) {
 	if (tomovellhead) {
 		if (tomove == NULL) {
 			tomove = tomovellhead;
@@ -427,7 +427,7 @@ void print_current_destination(aedvs* tomove, aedvs* tomovellhead) {
 
 
 
-void take_file_input(int argc, char* argv[]) {
+void GetFileInput(int argc, char* argv[]) {
 	int street, avenue, Numberofbuildings;
 
 	getmapsize(&street, &avenue);
@@ -442,14 +442,9 @@ void take_file_input(int argc, char* argv[]) {
 	read_activevehicle(&start_active);
 	if (open_file(argc, argv, TRUE))
 	{
-
-			/*Read*/
-			/* File exists -- process records */
-			//sequential_access();
-			/* Access any record */
 			aedv_initiator();
 
-			/* Close opened file -- will occur by default when file closes */
+			/* Close opened file*/
 			fclose(tfd);
 
 			getchar();
@@ -467,7 +462,7 @@ void take_file_input(int argc, char* argv[]) {
 	getchar();
 }
 
-void set_source_and_destination_and_assign_parking_location(aedvs* head, buildings* buildingz, int Numberofbuildings)
+void SetAddress(aedvs* head, buildings* buildingz, int Numberofbuildings)
 {
 	int mindist, dist;
 	aedvs* curr_parked = start_parked;
@@ -500,8 +495,4 @@ void set_source_and_destination_and_assign_parking_location(aedvs* head, buildin
 		}
 		cur_order = cur_order->next;
 	}
-}
-
-int squareOfNumber(int num){
-	return (num * num);
 }
