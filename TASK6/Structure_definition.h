@@ -107,4 +107,4 @@ typedef union aedv_file SFREC;
 
 
 
-#endif STRUCTURE_DEFINITION_H
+#endif //STRUCTURE_DEFINITION_H
