@@ -1,0 +1,51 @@
+﻿  Aedv_Functions.c
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\General.h(54,1): warning C4005: 'Voffset': macro redefinition
+  (compiling source file 'Aedv_Functions.c')
+  E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\General.h(48,1):
+  see previous definition of 'Voffset'
+  
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\General.h(57,1): warning C4005: 'ESC': macro redefinition
+  (compiling source file 'Aedv_Functions.c')
+  E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\General.h(31,1):
+  see previous definition of 'ESC'
+  
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\Structure_definition.h(20,1): warning C4005: 'MAXSIZE': macro redefinition
+  (compiling source file 'Aedv_Functions.c')
+  E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\General.h(41,1):
+  see previous definition of 'MAXSIZE'
+  
+  File_Manager.c
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\Aedv_Functions.c(121,18): error C2120: 'void' illegal with all types
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\Aedv_Functions.c(123,6): warning C4013: 'deliveryfile' undefined; assuming extern returning int
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\Aedv_Functions.c(131,4): warning C4013: 'print_current_destination' undefined; assuming extern returning int
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\Aedv_Functions.c(134,34): warning C4133: '=': incompatible types - from 'aedv *' to 'aedvs *'
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\Aedv_Functions.c(137,19): warning C4133: '=': incompatible types - from 'aedv *' to 'aedvs *'
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\Aedv_Functions.c(140,24): warning C4133: '=': incompatible types - from 'aedv *' to 'aedvs *'
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\Aedv_Functions.c(143,17): warning C4133: '=': incompatible types - from 'aedv *' to 'aedvs *'
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\Aedv_Functions.c(151,5): error C2371: 'aedv_ride_manager_2nd_step': redefinition; different basic types
+  E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\Aedv_Functions.h(34,6):
+  see declaration of 'aedv_ride_manager_2nd_step'
+  
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\General.h(54,1): warning C4005: 'Voffset': macro redefinition
+  (compiling source file 'File_Manager.c')
+  E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\General.h(48,1):
+  see previous definition of 'Voffset'
+  
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\General.h(57,1): warning C4005: 'ESC': macro redefinition
+  (compiling source file 'File_Manager.c')
+  E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\General.h(31,1):
+  see previous definition of 'ESC'
+  
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\Structure_definition.h(20,1): warning C4005: 'MAXSIZE': macro redefinition
+  (compiling source file 'File_Manager.c')
+  E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\General.h(41,1):
+  see previous definition of 'MAXSIZE'
+  
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\File_Manager.h(26,1): warning C4005: 'NUL': macro redefinition
+  (compiling source file 'File_Manager.c')
+  E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\General.h(30,1):
+  see previous definition of 'NUL'
+  
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\File_Manager.c(627,6): warning C4101: 'time': unreferenced local variable
+E:\Fall 2023\ECED 3401 Systems Analysis\AEDV PROJECT\PT6FINAL\PT6\File_Manager.c(722,8): warning C4133: '=': incompatible types - from 'aedv *' to 'aedvs *'
+  Generating Code...

@@ -20,6 +20,7 @@
 #include "Aedv_Functions.h"
 #include "File_Manager.h"
 #include "Aedv.h"
+#define ACTIVEVEHICLECOUNT 10
 
 /*FUNCTIONS TO TAKE USER INPUT*/
 
